@@ -146,7 +146,7 @@ const Home = () => {
 
       {/* ================= Section 4 ============================= */}
       <section className="px-[4%]">
-        <div className="container mx-auto">
+        <div className="container mx-auto  section">
           <div className="home_section4 py-10 flex items-start lg:items-center justify-center flex-col gap-10 ">
             <div className="tabs tabs_scroll flex items-center md:justify-center gap-10 py-4 w-full overflow-auto">
               <div className="tab whitespace-nowrap text-lg md:text-xl lg:text-2xl font-[Nunito] font-bold uppercase border-b-[3px] border-b-amber-600">
