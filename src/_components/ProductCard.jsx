@@ -7,14 +7,14 @@ import { Link } from 'react-router-dom'
 const ProductCard = () => {
   return (
     <>
-        <div className="card w-1/4 flex items-center justify-center flex-col gap-3 cursor-pointer">
+        <div className="card flex items-center justify-center flex-col gap-3 cursor-pointer">
             <div className="top w-full shadow-lg rounded-xl relative">
-                <img src={b4} alt="image" className='w-full rounded-xl h-80 object-cover'/>
-                <Link to={'/product'} className="cart flex items-center justify-center absolute top-4 right-4 cursor-pointer rounded-full w-12 h-12 bg-amber-600 text-white duration-200 hover:bg-black hover:text-white"><ShoppingCart  className='w-5'/></Link>
+                <img src={b4} alt="image" className='w-full rounded-xl h-42 md:h-72 lg:h-80 object-cover'/>
+                <Link to={'/product'} className="cart flex items-center justify-center absolute top-4 right-4 cursor-pointer rounded-full md:w-12 w-8 h-8 md:h-12 bg-amber-600 text-white duration-200 hover:bg-black hover:text-white"><ShoppingCart  className='md:w-5 w-4'/></Link>
             </div>
             <div className="bottom">
                 <div className="details flex items-center justify-center flex-col gap-1">
-                    <p className='font-[Nunito] font-bold text-xl'>Lorem ipsum dolor.</p>
+                    <p className='font-[Nunito] font-bold text-lg md:text-xl'>Lorem ipsum dolor.</p>
                     <div className="price flex items-center gap-4">
                         <span className='text-amber-600'>₹ 70.00</span>
                         <strike>₹ 80.00</strike>

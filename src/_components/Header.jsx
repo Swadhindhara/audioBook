@@ -23,8 +23,8 @@ const Header = () => {
       <div className={`header_container bg-black py-4 z-10 relative px-[4%] ${location.pathname === '/' ? "lg:bg-transparent" : "bg-black"}`}>
         <div className="container m-auto">
           <div className="header flex items-center justify-between">
-            <div className="left w-1/3">
-              <ul className="flex items-center gap-5">
+            <div className="left lg:w-1/3 fixed lg:static right-0 top-0 w-2/3 h-full bg-black lg:bg-transparent lg:z-0 z-30 lg:translate-0 translate-x-[100%]">
+              <ul className="flex lg:items-center items-start gap-5 flex-col lg:flex-row px-8 py-12 lg:p-0">
                 {menu.map((item, index) => (
                   <li key={index}>
                     <Link to={item.url} className="text-white">{item.name}</Link>
@@ -32,15 +32,15 @@ const Header = () => {
                 ))}
               </ul>
             </div>
-            <div className="middle flex items-center justify-center w-1/3">
+            <div className="middle flex items-center justify-center md:w-1/3">
               <Link to="/">
-                <img src={logo} alt="logo" className="w-52" />
+                <img src={logo} alt="logo" className="lg:w-52 md:w-54 w-40" />
               </Link>
             </div>
             <div className="right flex items-center justify-end gap-5 w-1/3">
-              <Link><User className="text-white" /></Link>
-              <Link><Heart className="text-white" /></Link>
-              <Link className="relative">
+              <Link to={'/profile'}><User className="text-white" /></Link>
+              <Link to={'/wishlist'}><Heart className="text-white" /></Link>
+              <Link className="relative" to={'/cart'}>
                 <ShoppingBag className="text-white" />
                 <div className="car_value absolute w-4 h-4 bg-amber-600 top-[-6px] right-[-6px] flex items-center justify-center text-sm rounded-full">
                   0

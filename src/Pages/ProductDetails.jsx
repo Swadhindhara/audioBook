@@ -8,7 +8,7 @@ import { TbCategoryFilled } from "react-icons/tb";
 import { IoLanguage } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 import { IoClose } from "react-icons/io5";
-import './../scrollbar.css';
+import "./../scrollbar.css";
 
 const ProductDetails = () => {
   const [active, setActive] = useState(false);
@@ -59,151 +59,105 @@ const ProductDetails = () => {
       </div>
 
       <div className="container mx-auto">
-        <div className="details h-[90dvh] flex flex-col justify-between">
+        <div className="details flex flex-col justify-between pb-10">
           <div className="top flex items-start gap-6 py-5">
             {/* ============= Left ============================ */}
-            <div className="left w-3/8 overflow-y-auto custom-scrollbar scroll-smooth" style={{height: 'calc(90dvh - 100px)'}}> 
-              <p className="leading-7 text-justify">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Inventore corrupti veniam soluta autem nemo necessitatibus dicta
-                molestiae quis nesciunt tempore labore voluptatum quia
-                repellendus aliquid ea architecto quisquam, explicabo commodi,
-                distinctio perferendis. Molestiae veniam asperiores nisi
-                adipisci illum libero magnam et numquam. Perferendis laborum
-                voluptatum omnis, dignissimos laudantium porro perspiciatis iure
-                consequuntur voluptatem tempora ipsam? Quis quae corrupti rem
-                ipsum! Voluptates laborum, temporibus, accusamus molestiae
-                doloribus saepe eius maiores repellendus voluptatibus voluptas
-                corporis, quisquam neque accusantium nobis deleniti cumque
-                adipisci! Optio mollitia ducimus nihil adipisci minima facere
-                sequi delectus nemo vel repellendus nesciunt minus qui possimus
-                molestias, ipsa molestiae corporis ab assumenda esse quae magni
-                quibusdam similique illo! Cum iure expedita dolores culpa quia
-                alias, nobis impedit fugiat enim quod earum ab neque laboriosam,
-                id odio corporis, repellat at nulla eius doloremque minima
-                pariatur. Eligendi perferendis iste inventore ratione temporibus
-                et, voluptatibus unde quam sed cum voluptatem, ducimus dolorem
-                pariatur a quaerat debitis. Voluptas obcaecati voluptates, ad
-                rerum earum inventore delectus, eum tempora eaque, vel
-                perspiciatis dolorem hic et ullam eligendi consectetur.
-                Asperiores commodi et eum quidem vel consectetur corrupti.
-                Incidunt ea enim autem at ipsam dolores ratione. Eaque suscipit
-                quisquam veniam assumenda, hic in et ipsam at error adipisci,
-                cumque tempora, officia similique porro eum sit ipsum? Assumenda
-                quaerat minus dolorum possimus reiciendis, amet veniam omnis
-                itaque tempore perferendis soluta nam commodi dolor! Sunt,
-                impedit officia quaerat qui atque aspernatur mollitia sit
-                ducimus dolores minus, labore doloremque consectetur dolore
-                laborum beatae doloribus magni pariatur possimus perferendis
-                quisquam. Placeat culpa consequuntur suscipit error beatae,
-                exercitationem soluta perspiciatis itaque et quae maiores neque
-                voluptatum nemo quidem necessitatibus quasi, facilis temporibus
-                officiis ipsam facere? Ducimus quod quia sit inventore
-                aspernatur officiis, veritatis, repellendus, odio dolore
-                deserunt minima! Similique, possimus dolorum recusandae tempore
-                aspernatur incidunt architecto labore laborum eligendi quia
-                atque rerum impedit repellendus qui cum eius accusamus commodi?
-                Numquam, in officiis dignissimos quam cupiditate omnis nisi
-                deleniti doloribus modi harum voluptates eum, praesentium
-                similique corrupti reiciendis consequuntur nam. Similique
-                eligendi, natus harum consequatur repudiandae fugit error ea
-                fuga, ipsa libero molestias vero illo doloremque magni quia
-                deserunt delectus nesciunt rem iusto sed quod veniam dolores.
-                Architecto perferendis rem quis sit non dolorum suscipit unde
-                repellendus quaerat tempore cum beatae nulla illo alias ullam
-                odio impedit obcaecati ratione quidem voluptates, earum, natus
-                tempora provident ea? Facere atque doloribus eum similique
-                aliquid sapiente vero eos, ipsum quisquam magni nesciunt,
-                tempore porro provident rem ipsam ducimus minus quae iusto
-                eligendi culpa accusantium. Soluta, adipisci quasi. Accusantium
-                officia aliquam reiciendis similique? Est, itaque reiciendis eum
-                rerum, nesciunt cum excepturi dolore ex, quasi fugit aspernatur
-                laudantium maxime. Ipsum consectetur sapiente ea eligendi
-                voluptatem minima ut voluptates laboriosam iure, eveniet odit!
-                Voluptatem sequi exercitationem totam dolor. Enim eaque
-                cupiditate adipisci maiores dolor! Placeat dignissimos amet
-                minus explicabo praesentium pariatur vero beatae nihil aliquam
-                laborum rem aut sed earum temporibus perferendis vel aliquid
-                ipsa, dolorum maxime? Amet praesentium culpa, ad sunt vel sit
-                necessitatibus dolor earum suscipit deleniti molestias labore
-                animi quas ullam! Ea exercitationem suscipit dolore doloremque
-                accusantium omnis natus vitae id quod, mollitia magni voluptas
-                eum accusamus beatae ratione? Consectetur cumque fugit nostrum
-                quod saepe ducimus, cum adipisci, libero assumenda repellat
-                minus perspiciatis non blanditiis placeat? Quidem eos culpa
-                suscipit accusamus! Fugit, magni amet fuga animi nam aspernatur
-                repellendus blanditiis, distinctio omnis quo earum sapiente
-                tempora dolor vitae sit iure temporibus porro, at laudantium
-                quibusdam rerum dolorum aliquam molestias! Porro, et alias
-                laborum, labore fuga minus explicabo blanditiis quia quo 
-              </p>
-            </div>
-            {/* ============ Right ========================= */}
-            <div className="right w-5/8 flex items-start flex-col gap-4">
-              <div className="details_box flex items-center gap-4">
-                <img
-                  src={b3}
-                  alt="image"
-                  className="rounded-2xl shadow-md w-80"
-                />
-                <div className="details flex flex-col gap-2">
-                  <h3 className="font-[Nunito] text-2xl font-bold">
-                    Lorem ipsum dolor sit amet consectetur adipisicing.
-                  </h3>
-                  <p>
-                    <span>Author :</span> Jhon Dove
-                  </p>
-                  <div className="boxes flex items-center">
-                    <div className="box flex items-center gap-2 border-r border-zinc-400 px-3 pl-0">
-                      <FaPlay className="text-amber-600" />
-                      <small className="text-zinc-500">18M+</small>
-                    </div>
-                    <div className="box flex items-center gap-2 border-r border-zinc-400 px-3">
-                      <FaStar className="text-amber-600" />
-                      <small className="text-zinc-500">4.7</small>
-                    </div>
-                    <div className="box flex items-center gap-2 border-r border-zinc-400 px-3">
-                      <TbCategoryFilled className="text-amber-600" />
-                      <small className="text-zinc-500">Science</small>
-                    </div>
-                    <div className="box flex items-center gap-2 border-r border-zinc-400 px-3">
-                      <IoLanguage className="text-amber-600" />
-                      <small className="text-zinc-500">Hindi</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="description flex flex-col items-start gap-3">
-                <span className="font-[Nunito] font-bold text-xl border-b-2 border-amber-600 uppercase">
-                  About Show
-                </span>
-                <p className="text-zinc-600 selection:bg-amber-600 selection:text-white leading-7">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Expedita fuga quasi provident labore voluptatem, voluptas
-                  alias beatae nisi. Voluptate odio quasi amet dolor natus sunt
-                  iste minima eum dicta! Saepe eaque architecto repellendus
-                  consequuntur dolor maiores cumque vel porro assumenda officia
-                  vero quas deleniti, possimus alias iusto culpa odio, voluptas
-                  sed! Harum maiores eum in repellat laboriosam voluptate cumque
-                  quaerat.
+            <div className="left w-1/2 flex items-center justify-center h-[70dvh]">
+              <div className="content flex items-center justify-center flex-col gap-2 p-3 w-[80%]">
+                <p className="font-[Rubik] uppercase text-center">fiction</p>
+                <h2 className="font-[Nunito] text-4xl uppercase font-semibold text-center">
+                  nocturnal creatures
+                </h2>
+                <p className="font-[Rubik] uppercase text-center">
+                  by said sayrafiezadeh
                 </p>
+                <small className="font-semibold font-[Rubik] text-center">
+                  April 27, 2025
+                </small>
               </div>
+            </div>
+
+            {/* ============ Right ========================= */}
+            <div className="right w-1/2 flex items-center justify-center h-[70dvh]">
+              <img
+                src={b3}
+                alt="image"
+                className="rounded-xl shadow-xl w-[70%] h-96 object-cover"
+              />
             </div>
           </div>
 
-          <div className="bottom h-[100px]">
-            <AudioPlayer
-              ref={audioRef}
-              className="w-full bg-black shadow-none"
-              autoPlay
-              src={song}
-              onPlay={() => console.log("onPlay")}
-              showSkipControls
-              showJumpControls
-              showFilledVolume
-              progressJumpSteps={{ backward: 10000, forward: 10000 }}
-              layout="horizontal"
-            />
+          <div className="bottom flex items-center justify-center flex-col gap-14">
+            <div className="audio_box w-4/6">
+              <AudioPlayer
+                ref={audioRef}
+                className="w-full bg-black shadow-none"
+                autoPlay={false}
+                src={song}
+                onPlay={() => console.log("onPlay")}
+                showSkipControls
+                showJumpControls
+                showFilledVolume
+                progressJumpSteps={{ backward: 10000, forward: 10000 }}
+                layout="horizontal"
+              />
+            </div>
+            <div className="text_box w-4/6">
+              <p
+                className="leading-7 text-xl font-medium first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-2"
+                style={{ fontFamily: "Cormorant Garamond" }}
+              >
+                Iorem ipsum dolor sit amet consectetur adipisicing elit.
+                Cupiditate incidunt soluta, eaque quisquam, omnis porro modi
+                officia nihil reiciendis, voluptates sint! Atque, reprehenderit
+                nobis, dignissimos veritatis officia dolorem fugit ex alias fuga
+                a autem labore. Facilis nisi aut, aspernatur fugiat saepe
+                placeat nostrum fugit aperiam voluptatibus, doloribus blanditiis
+                ratione eligendi aliquid! Vel beatae illum, illo eius,
+                distinctio laborum maiores voluptate adipisci in incidunt nulla
+                saepe quibusdam. Est quidem, pariatur distinctio quaerat
+                reprehenderit error rerum libero voluptate non! Laboriosam rerum
+                quam omnis, veniam nostrum harum laudantium nesciunt et dicta,
+                placeat voluptas esse perspiciatis eius eum suscipit cumque ut
+                veritatis quasi ea nulla provident est quisquam. Porro placeat,
+                quam quaerat obcaecati aspernatur tenetur commodi praesentium
+                aliquam autem? Iusto officia minima, ducimus vitae possimus nam
+                ex molestias perspiciatis quas excepturi inventore voluptatum,
+                enim consectetur, quis architecto iure voluptatem blanditiis
+                nulla. Voluptates hic minima quos nisi placeat! Obcaecati
+                deleniti deserunt minus totam itaque rem, libero optio ex
+                delectus, quas, iste modi ipsam quo! Dolores ipsum tempore
+                beatae eos necessitatibus recusandae sed praesentium, expedita
+                voluptatem iste, quo error! Ad, fugit mollitia voluptatem id
+                pariatur assumenda. Iusto tenetur rem ipsa cumque laborum vel
+                maiores laudantium explicabo non, neque natus quas porro soluta
+                suscipit deleniti culpa quod eveniet. Odit id hic blanditiis
+                iusto in non. Cum omnis ex neque explicabo fuga. Voluptatem
+                neque dolor nulla totam earum illo impedit optio aperiam eum ad
+                similique, nobis asperiores recusandae fugiat nisi in quam
+                perferendis corrupti quibusdam harum minima alias? Provident
+                asperiores tenetur animi, ipsa sapiente optio dolore voluptate
+                qui, velit eligendi ad distinctio totam facere eaque maiores
+                quasi eveniet sint quae in! Asperiores perferendis eos eligendi
+                qui dolore obcaecati vel doloribus modi ipsa ut quo cumque
+                dignissimos earum distinctio repudiandae voluptatem, sunt veniam
+                natus iure porro quae mollitia temporibus ullam. Veniam, non.
+                Perspiciatis commodi deleniti fuga perferendis, cum officia
+                facilis illo vitae rem! Accusantium numquam cupiditate fuga
+                eveniet nam saepe, eligendi incidunt autem veritatis sit!
+                Voluptatum optio, omnis laboriosam quos asperiores vero quae non
+                numquam, cupiditate corporis molestias provident expedita nihil
+                dicta! Sunt illum suscipit rem atque, ullam praesentium quae
+                ipsum fugit dolore nihil! Voluptates commodi similique
+                perspiciatis consequuntur aliquid, natus quo quidem ut totam
+                deleniti blanditiis, tempora porro incidunt nostrum eligendi
+                aspernatur, veniam adipisci voluptas at aperiam ullam ipsa!
+                Error ad, amet ipsum at aut quos accusamus, modi voluptas optio
+                ducimus provident? Ullam molestias mollitia nostrum excepturi
+                illo placeat amet laborum eum. Animi explicabo officiis quas?
+                Ab, dolorum!
+              </p>
+            </div>
           </div>
         </div>
       </div>
