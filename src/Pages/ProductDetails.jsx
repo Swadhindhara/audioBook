@@ -36,15 +36,15 @@ const ProductDetails = () => {
           active ? "flex" : "hidden"
         }`}
       >
-        <div className="pop_box  h-fit bg-white flex items-center py-12 relative px-8 justify-center flex-col gap-4 rounded-xl shadow-xl">
-          <h2 className="font-black font-[Nunito] text-4xl">
+        <div className="pop_box  h-fit w-[90%] lg:w-fit bg-white flex items-center py-10 md:py-12 relative px-4 md:px-8 justify-center flex-col gap-4 rounded-xl shadow-xl">
+          <h2 className="font-black text-center font-[Nunito] text-xl md:text-2xl lg:text-4xl">
             Subscribe to Continue Listening
           </h2>
-          <p className="text-lg  text-zinc-400 mt-[-10px]">
+          <p className="lg:text-lg w-[90%] text-center text-md  text-zinc-400 mt-[-10px]">
             Unlock unlimited access to premium audio content
           </p>
           <Button
-            className={`bg-amber-600  mt-5 w-full cursor-pointer py-5 hover:bg-black hover:text-white`}
+            className={`bg-amber-600 text-white  lg:mt-5 w-full cursor-pointer py-5 hover:bg-black hover:text-white`}
           >
             Subscribe Now
           </Button>
@@ -59,13 +59,13 @@ const ProductDetails = () => {
       </div>
 
       <div className="container mx-auto">
-        <div className="details flex flex-col justify-between pb-10">
-          <div className="top flex items-start gap-6 py-5">
+        <div className="details flex flex-col gap-8 justify-between pb-10">
+          <div className="top flex items-start flex-col lg:flex-row  gap-6 py-5">
             {/* ============= Left ============================ */}
-            <div className="left w-1/2 flex items-center justify-center h-[70dvh]">
-              <div className="content flex items-center justify-center flex-col gap-2 p-3 w-[80%]">
+            <div className="left w-full lg:w-1/2 flex items-center justify-center lg:h-[70dvh]">
+              <div className="content flex items-center justify-center flex-col gap-2 p-3 w-full lg:w-[80%]">
                 <p className="font-[Rubik] uppercase text-center">fiction</p>
-                <h2 className="font-[Nunito] text-4xl uppercase font-semibold text-center">
+                <h2 className="font-[Nunito] text-2xl lg:text-4xl uppercase font-semibold text-center">
                   nocturnal creatures
                 </h2>
                 <p className="font-[Rubik] uppercase text-center">
@@ -78,33 +78,33 @@ const ProductDetails = () => {
             </div>
 
             {/* ============ Right ========================= */}
-            <div className="right w-1/2 flex items-center justify-center h-[70dvh]">
+            <div className="right w-full lg:w-1/2 flex items-center justify-center lg:h-[70dvh]">
               <img
                 src={b3}
                 alt="image"
-                className="rounded-xl shadow-xl w-[70%] h-96 object-cover"
+                className="rounded-xl shadow-xl w-full lg:w-[70%] h-72 lg:h-96 object-cover"
               />
             </div>
           </div>
 
-          <div className="bottom flex items-center justify-center flex-col gap-14">
-            <div className="audio_box w-4/6">
+          <div className="bottom flex items-center justify-center flex-col gap-8 lg:gap-14">
+            <div className="audio_box w-full lg:w-4/6">
               <AudioPlayer
                 ref={audioRef}
                 className="w-full bg-black shadow-none"
-                autoPlay={false}
+                autoPlay
                 src={song}
                 onPlay={() => console.log("onPlay")}
-                showSkipControls
+                // showSkipControls
                 showJumpControls
                 showFilledVolume
                 progressJumpSteps={{ backward: 10000, forward: 10000 }}
-                layout="horizontal"
+                layout={`${window.innerWidth < 1024 ? "stacked" : "horizontal"}`}
               />
             </div>
-            <div className="text_box w-4/6">
+            <div className="text_box w-full lg:w-4/6">
               <p
-                className="leading-7 text-xl font-medium first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-2"
+                className="leading-7 text-lg md:text-xl font-medium first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-2"
                 style={{ fontFamily: "Cormorant Garamond" }}
               >
                 Iorem ipsum dolor sit amet consectetur adipisicing elit.

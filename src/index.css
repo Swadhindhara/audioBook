@@ -124,10 +124,10 @@
 /* custom-scrollbar.css */
 
 /* Hide scrollbar but keep scroll functionality */
-.tabs_scroll::-webkit-scrollbar {
+.tabs_scroll::-webkit-scrollbar, .Subscriptions_boxes::-webkit-scrollbar {
   display: none;
 }
-.tabs_scroll {
+.tabs_scroll, .Subscriptions_boxes {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
