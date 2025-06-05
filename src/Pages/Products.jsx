@@ -1,6 +1,6 @@
 import { MainProductCard } from "@/_components";
 import { SlidersHorizontal } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { Slider } from "antd";
 import {
   Drawer,
@@ -31,6 +31,16 @@ const Products = () => {
     { name: "Religion & Spirituality" },
   ];
 
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const handleCategory = (index) => {
+    if (activeCategory === index) {
+      setActiveCategory(null); // Collapse
+    } else {
+      setActiveCategory(index); // Expand new
+    }
+  };
+
   return (
     <div className="main px-[4%]">
       <div className="container mx-auto">
@@ -54,8 +64,13 @@ const Products = () => {
                 <div className="categories flex items-center flex-wrap gap-2 w-full">
                   {categories.map((item, index) => (
                     <div
-                      className={`box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-sm hover:bg-zinc-100`}
+                      className={` ${
+                        activeCategory === index
+                          ? "bg-orange-200 text-amber-600 border border-amber-600"
+                          : ""
+                      } box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-sm hover:bg-zinc-100`}
                       key={index}
+                      onClick={() => handleCategory(index)}
                     >
                       {item.name}
                     </div>
@@ -105,8 +120,13 @@ const Products = () => {
                     <div className="categories flex items-center flex-wrap gap-2 w-full">
                       {categories.map((item, index) => (
                         <div
-                          className="box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-black text-[13px] md:text-sm"
+                          className={` ${
+                            activeCategory === index
+                              ? "bg-orange-200 text-amber-600 border border-amber-600"
+                              : ""
+                          } box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-sm hover:bg-zinc-100`}
                           key={index}
+                          onClick={() => handleCategory(index)}
                         >
                           {item.name}
                         </div>

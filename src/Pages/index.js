@@ -4,6 +4,7 @@ import ProductDetails from "./ProductDetails";
 import Profile from "./Profile";
 import Contact from "./Contact";
 import Products from "./Products";
+import Wishlist from "./Wishlist";
 
 export {
     Home,
@@ -11,5 +12,6 @@ export {
     ProductDetails,
     Profile,
     Contact,
-    Products
+    Products,
+    Wishlist
 }

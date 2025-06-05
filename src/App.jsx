@@ -8,6 +8,7 @@ import {
   ProductDetails,
   Products,
   Profile,
+  Wishlist,
 } from "./Pages";
 import Header from "./_components/Header.jsx";
 import { Footer, ScrollTo } from "./_components";
@@ -28,6 +29,7 @@ const App = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/wishlist" element={<Wishlist />} />
               <Route path="*" element={<Error />} />
             </Routes>
             <Footer />

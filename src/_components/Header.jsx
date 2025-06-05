@@ -9,7 +9,7 @@ import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrig
 
 const Header = () => {
   const location = useLocation();
-  const authStatus = true;
+  const authStatus = false;
 
   const handleLogin = () => {
     console.log("HI");
@@ -80,11 +80,15 @@ const Header = () => {
           </div>
         </div>
 
-        <DialogContent>
+        <DialogContent className={`w-fit`}>
           <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogTitle>
+              {/* <img src={logo} alt="" /> */}
+              <h1 className="font-[Nunito] font-bold text-3xl text-center">LOGO</h1>
+              <p className="mt-3 font-[Nunito] font-light font-md text-black">To save a shot, please create a account.</p>
+            </DialogTitle>
             <DialogDescription className={`items-center justify-center flex flex-col mt-4`}>
-              <Button className={`bg-white shadow-none text-black border border-black rounded-4xl hover:bg-amber-50 hover:text-black cursor-pointer flex items-centerg3
+              <Button className={`w-full bg-white shadow-none text-black border border-black rounded-4xl hover:bg-amber-50 hover:text-black cursor-pointer flex items-center gap-3
                 `}> <img src={search} alt="icon" className=" w-4 md:w-5 lg:w-6"/> Sign In With Google</Button>
             </DialogDescription>
           </DialogHeader>
