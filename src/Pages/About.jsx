@@ -29,6 +29,8 @@ const About = () => {
   return (
     <>
       {/* =================== Section 1 =============================== */}
+      {/* =================== Section 1 =============================== */}
+      {/* =================== Section 1 =============================== */}
       <div className="main px-[4%]">
         <div className="container mx-auto">
           <section className="pt-7 lg:pb-10 flex items-center justify-center flex-col lg:flex-row lg:gap-0 gap-8">
