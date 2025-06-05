@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "./components/ui/button";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
+  About,
   Contact,
   Error,
   Home,
@@ -30,6 +31,7 @@ const App = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/products" element={<Products />} />
               <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/about" element={<About />} />
               <Route path="*" element={<Error />} />
             </Routes>
             <Footer />
