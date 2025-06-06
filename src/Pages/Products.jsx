@@ -1,6 +1,6 @@
 import { MainProductCard } from "@/_components";
 import { SlidersHorizontal } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Slider } from "antd";
 import {
   Drawer,
@@ -13,25 +13,18 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories } from "@/features/Categories/categorySlice";
 
 const Products = () => {
-  const categories = [
-    { name: "Fiction" },
-    { name: "Children's Audiobooks" },
-    { name: "Non-Fiction" },
-    { name: "Mystery & Thriller" },
-    { name: "Science Fiction" },
-    { name: "Fantasy" },
-    { name: "Health & Wellness" },
-    { name: "Biography & Memoir" },
-    { name: "Self-Help" },
-    { name: "Romance" },
-    { name: "History" },
-    { name: "Business & Finance" },
-    { name: "Religion & Spirituality" },
-  ];
-
   const [activeCategory, setActiveCategory] = useState(null);
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.categories);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
 
   const handleCategory = (index) => {
     if (activeCategory === index) {
@@ -72,7 +65,7 @@ const Products = () => {
                       key={index}
                       onClick={() => handleCategory(index)}
                     >
-                      {item.name}
+                      {item?.title}
                     </div>
                   ))}
                 </div>
@@ -128,7 +121,7 @@ const Products = () => {
                           key={index}
                           onClick={() => handleCategory(index)}
                         >
-                          {item.name}
+                          {item?.title}
                         </div>
                       ))}
                     </div>

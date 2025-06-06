@@ -19,7 +19,6 @@ const Header = () => {
     { name: "Home", url: "/" },
     { name: "About", url: "/about" },
     { name: "Products", url: "/products" },
-    { name: "Pages", url: "/pages" },
     { name: "Contact", url: "/contact" },
   ];
 
