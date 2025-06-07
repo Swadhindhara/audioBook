@@ -5,7 +5,15 @@ import logo from "./../assets/images/logo.svg";
 import { Heart, ShoppingBag, User } from "lucide-react";
 import avatar from "../assets/graphics/avatar.svg";
 import search from "../assets/graphics/search.png";
-import { DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import { useGoogleLogin } from "@react-oauth/google";
 
 const Header = () => {
   const location = useLocation();
@@ -19,9 +27,32 @@ const Header = () => {
     { name: "Home", url: "/" },
     { name: "About", url: "/about" },
     { name: "Products", url: "/products" },
-    { name: "Pages", url: "/pages" },
     { name: "Contact", url: "/contact" },
   ];
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+
+      try {
+        const res = await fetch(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${tokenResponse.access_token}`,
+            },
+          }
+        );
+
+        const profile = await res.json();
+        console.log("User Profile:", profile);
+
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    },
+    onError: (error) => console.error("Login Failed:", error),
+    scope: "openid profile email",
+  });
 
   return (
     <>
@@ -84,12 +115,29 @@ const Header = () => {
           <DialogHeader>
             <DialogTitle>
               {/* <img src={logo} alt="" /> */}
-              <h1 className="font-[Nunito] font-bold text-3xl text-center">LOGO</h1>
-              <p className="mt-3 font-[Nunito] font-light font-md text-black">To save a shot, please create a account.</p>
+              <h1 className="font-[Nunito] font-bold text-3xl text-center">
+                LOGO
+              </h1>
+              <p className="mt-3 font-[Nunito] font-light font-md text-black">
+                To save a shot, please create a account.
+              </p>
             </DialogTitle>
-            <DialogDescription className={`items-center justify-center flex flex-col mt-4`}>
-              <Button className={`w-full bg-white shadow-none text-black border border-black rounded-4xl hover:bg-amber-50 hover:text-black cursor-pointer flex items-center gap-3
-                `}> <img src={search} alt="icon" className=" w-4 md:w-5 lg:w-6"/> Sign In With Google</Button>
+            <DialogDescription
+              className={`items-center justify-center flex flex-col mt-4`}
+            >
+              <Button
+                className={`w-full bg-white shadow-none text-black border border-black rounded-4xl hover:bg-amber-50 hover:text-black cursor-pointer flex items-center gap-3
+                `}
+                onClick={() => login()}
+              >
+                {" "}
+                <img
+                  src={search}
+                  alt="icon"
+                  className=" w-4 md:w-5 lg:w-6"
+                />{" "}
+                Sign In With Google
+              </Button>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

@@ -6,6 +6,7 @@ import {
   Contact,
   Error,
   Home,
+  Privacy,
   ProductDetails,
   Products,
   Profile,
@@ -32,6 +33,7 @@ const App = () => {
               <Route path="/products" element={<Products />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/about" element={<About />} />
+              <Route path="/privacy-policy" element={<Privacy />} />
               <Route path="*" element={<Error />} />
             </Routes>
             <Footer />

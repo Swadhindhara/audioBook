@@ -6,6 +6,7 @@ import Contact from "./Contact";
 import Products from "./Products";
 import Wishlist from "./Wishlist";
 import About from "./About";
+import Privacy from "./Privacy";
 
 export {
     Home,
@@ -15,5 +16,6 @@ export {
     Contact,
     Products,
     Wishlist,
-    About
+    About,
+    Privacy
 }
