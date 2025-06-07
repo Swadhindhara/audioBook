@@ -59,8 +59,8 @@ const Footer = () => {
                         <p className='text-white font-[Rubik]'>&copy; All Rights Reserved.</p>
                     </div>
                     <div className="right flex items-center gap-5">
-                        <Link className='text-white font-[Rubik]'>Terms & Condition</Link>
-                        <Link className='text-white font-[Rubik]'>Privacy Policy</Link>
+                        <Link to={'/terms&conditions'} className='text-white font-[Rubik]'>Terms & Condition</Link>
+                        <Link to={'/privacy-policy'} className='text-white font-[Rubik]'>Privacy Policy</Link>
                     </div>
                 </div>
             </div>

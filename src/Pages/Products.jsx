@@ -15,14 +15,17 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "@/features/Categories/categorySlice";
+import { fetchAllProducts } from "@/features/Products/productsSlice";
 
 const Products = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
+  const { products, isLoading, isError } = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(fetchCategories());
+    dispatch(fetchAllProducts())
   }, [dispatch]);
 
 
