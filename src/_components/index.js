@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import Footer from "./Footer";
 import ScrollTo from './ScrollTo';
 import MainProductCard from "./MainProductCard";
+import PlanCard from "./PlanCard";
 
 export {
     Header,
@@ -11,5 +12,6 @@ export {
     ProductCard,
     Footer,
     ScrollTo,
-    MainProductCard
+    MainProductCard,
+    PlanCard
 }
