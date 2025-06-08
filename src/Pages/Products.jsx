@@ -12,6 +12,16 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "@/features/Categories/categorySlice";
@@ -21,20 +31,45 @@ const Products = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
-  const { products, isLoading, isError } = useSelector((state) => state.products);
+  const { products, isLoading, isError } = useSelector(
+    (state) => state.products
+  );
+
+  const [filters, setActiveFilters] = useState({
+    categoryId: "",
+    price: [0, 0],
+    age: [0, 0],
+  });
 
   useEffect(() => {
     dispatch(fetchCategories());
-    dispatch(fetchAllProducts())
+    dispatch(fetchAllProducts());
   }, [dispatch]);
 
+  useEffect(() => {
+    const activeFilter = {
+      ...(filters.categoryId && { categoryId: filters.categoryId }),
+      ...(filters.price && {
+        minPrice: filters.price[0],
+        maxPrice: filters.price[1],
+      }),
+      ...(filters.age && { minAge: filters.age[0], maxAge: filters.age[1] }),
+    };
 
-  const handleCategory = (index) => {
+    dispatch(fetchAllProducts(activeFilter));
+  }, [dispatch, filters]);
+
+  const handleCategory = (index, categoryId) => {
     if (activeCategory === index) {
-      setActiveCategory(null); // Collapse
+      setActiveCategory(null);
     } else {
-      setActiveCategory(index); // Expand new
+      setActiveCategory(index);
     }
+
+    setActiveFilters((prev) => ({
+      ...prev,
+      categoryId: prev.categoryId === categoryId ? "" : categoryId,
+    }));
   };
 
   return (
@@ -66,7 +101,7 @@ const Products = () => {
                           : ""
                       } box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-sm hover:bg-zinc-100`}
                       key={index}
-                      onClick={() => handleCategory(index)}
+                      onClick={() => handleCategory(index, item?._id)}
                     >
                       {item?.title}
                     </div>
@@ -78,15 +113,18 @@ const Products = () => {
                 <p className="font-bold font-[Nunito]">Price Range</p>
                 <Slider
                   range
-                  defaultValue={[100, 500]}
-                  min={100}
+                  defaultValue={[0, 1000]}
+                  onChange={(value) => {
+                    setActiveFilters((prev) => ({ ...prev, price: value }));
+                  }}
+                  min={0}
                   max={1000}
                   step={50}
                   className="custom-slider"
                 />
                 <div className="range w-full flex items-center justify-between mt-[-16px]">
-                  <small className="font-semibold font-[Nunito]">100</small>
-                  <small className="font-semibold font-[Nunito]">500+</small>
+                  <small className="font-semibold font-[Nunito]">0</small>
+                  <small className="font-semibold font-[Nunito]">1000</small>
                 </div>
               </div>
 
@@ -94,9 +132,13 @@ const Products = () => {
                 <p className="font-bold font-[Nunito]">Age Range</p>
                 <Slider
                   range
-                  defaultValue={[5, 15]}
+                  defaultValue={[0, 18]}
+                  min={0}
                   max={18}
                   step={1}
+                  onChange={(value) => {
+                    setActiveFilters((prev) => ({ ...prev, age: value }));
+                  }}
                   className="custom-slider"
                 />
                 <div className="range w-full flex items-center justify-between mt-[-16px]">
@@ -134,8 +176,11 @@ const Products = () => {
                     <p className="font-bold font-[Nunito]">Price Range</p>
                     <Slider
                       range
-                      defaultValue={[100, 500]}
-                      min={100}
+                      defaultValue={[0, 1000]}
+                      onChange={(value) => {
+                        setActiveFilters((prev) => ({ ...prev, price: value }));
+                      }}
+                      min={0}
                       max={1000}
                       step={50}
                       className="custom-slider"
@@ -152,9 +197,13 @@ const Products = () => {
                     <p className="font-bold font-[Nunito]">Age Range</p>
                     <Slider
                       range
-                      defaultValue={[5, 15]}
+                      defaultValue={[0, 18]}
+                      min={0}
                       max={18}
                       step={1}
+                      onChange={(value) => {
+                        setActiveFilters((prev) => ({ ...prev, age: value }));
+                      }}
                       className="custom-slider"
                     />
                     <div className="range w-full flex items-center justify-between mt-[-16px]">
@@ -167,15 +216,47 @@ const Products = () => {
             </DrawerContent>
           </Drawer>
 
-          <div className="right w-full lg:w-6/8 grid grid-cols-2 md:grid-cols-3 gap-4">
-            <MainProductCard />
-            <MainProductCard />
-            <MainProductCard />
-            <MainProductCard />
-            <MainProductCard />
-            <MainProductCard />
-            <MainProductCard />
-            <MainProductCard />
+          <div className="right w-full lg:w-6/8 flex flex-col justify-center items-center gap-10">
+            <div className="boxes w-full grid grid-cols-2 md:grid-cols-3 gap-4 gap-y-6">
+              {!isLoading &&
+                products?.result?.map((product, index) => (
+                  <MainProductCard key={index} product={product} />
+                ))}
+              {isLoading &&
+                [1, 2, 3, 4, 5].map((index) => (
+                  <div className="flex flex-col space-y-3" key={index}>
+                    <Skeleton className="lg:h-[200px] h-[120px] md:h-[170px] w-full rounded-xl" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 md:w-3/4 w-full" />
+                    </div>
+                  </div>
+                ))}
+            </div>
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#" isActive>
+                    2
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">3</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </div>
         </div>
       </div>
