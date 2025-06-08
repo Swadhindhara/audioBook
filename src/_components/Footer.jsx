@@ -21,10 +21,10 @@ const Footer = () => {
                     <div className="middle w-full lg:w-1/3 flex flex-col gap-5 justify-center">
                         <p className='font-semibold text-xl font-[Rubik]'>Quick Links</p>
                         <ul className='flex flex-col gap-4 items-start'>
-                            <li><Link>Home</Link></li>
-                            <li><Link>About us</Link></li>
-                            <li><Link>Contact us</Link></li>
-                            <li><Link>Products</Link></li>
+                            <li><Link to={'/'}>Home</Link></li>
+                            <li><Link to={'/about'}>About us</Link></li>
+                            <li><Link to={'/contact'}>Contact us</Link></li>
+                            <li><Link to={'/products'}>Products</Link></li>
                         </ul>
                     </div>
                     <div className="right w-full lg:w-1/3 flex flex-col gap-2">
