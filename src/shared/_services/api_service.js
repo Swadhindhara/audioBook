@@ -11,6 +11,7 @@ const authURL = rootUrl + 'admin';
 const categoryURL = rootUrl + 'category';
 const bannerURL = rootUrl + 'banners';
 const pagesURL = rootUrl + "pages";
+const productURL = rootUrl + "product";
 
 
 
@@ -35,6 +36,27 @@ async function pagesData(id) {
   });
 }
 
+async function getTrendingproduct() {
+  return await axios.get(productURL + '/trending', {
+  });
+}
+async function getFeaturedproduct() {
+  return await axios.get(productURL + '/featured', {
+  });
+}
+async function getTopRatingPoduct() {
+  return await axios.get(productURL + '/top-rating', {
+  });
+}
+async function getTopSellerproduct() {
+  return await axios.get(productURL + '/top-seller', {
+  });
+}
+async function getLatestproduct() {
+  return await axios.get(productURL + '/latest', {
+  });
+}
+
 
 
 
@@ -42,7 +64,9 @@ async function pagesData(id) {
 export const service = {
   getbanner,
 
-  pagesData
+  pagesData,
+
+  getTrendingproduct, getFeaturedproduct, getTopRatingPoduct, getTopSellerproduct, getLatestproduct
 
 
 

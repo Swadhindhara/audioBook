@@ -25,9 +25,7 @@ export function getbanner() {
     dispatch(setLoading(true))
     try {
       await service.getbanner().then(
-        (response) => {
-          console.log(response);
-          
+        (response) => {          
           dispatch(setLoading(false))
           dispatch(setbannerData(response.data))
         }, (error) => {

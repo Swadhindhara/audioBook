@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import categoryReducer from './../features/Categories/categorySlice';
-import productReducer from '../features/Products/productsSlice';
+import productsReducer from '../features/Products/productsSlice';
 import authReducer from '../features/Auth/authSlice';
 import userReducer from '../features/User/userSlice'
 
@@ -10,12 +10,13 @@ import userReducer from '../features/User/userSlice'
 
 import bannerReducer from './bannerSlice';
 import pageReducer from './pagesSlice'
+import productReducer from './productSlice';
 
 
 const store = configureStore({
     reducer: {
         categories: categoryReducer,
-        products: productReducer,
+        products: productsReducer,
         user: authReducer,
         LogProfile: userReducer,
         
@@ -26,6 +27,7 @@ const store = configureStore({
         
         banner: bannerReducer,
         page: pageReducer,
+        product: productReducer,
 
     }
 })

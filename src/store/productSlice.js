@@ -1,75 +1,55 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { service } from '../shared/_services/api_service'
 import { setLoading } from './loader';
-import { errorHandler, successHandler } from '../shared/_helper/responseHelper';
 
 const initialState = {
-  productData: [],
+  trendingProductData: [],
+  featuredProductData: [],
+  topRatingProductData: [],
+  topSellerProductData: [],
+  latestProductData: [],
   totalproduct: 0,
-  isOpenModal: false,
-  isStatusOpenModal: false,
+
 }
 
 export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    setproductData(state, { payload }) {
-      state.productData = payload.result
-      state.totalproduct = payload.total
+    setTrendingProductData(state, { payload }) {
+      state.trendingProductData = payload.result
     },
-    updateproductData(state, { payload }) {
-      const objIndex = state.productData.findIndex((obj) => obj.id === payload.id);
-      if (objIndex >= 0) {
-        state.productData[objIndex] = payload
-      }
+   
+    setFeaturedProductData(state, { payload }) {
+      state.featuredProductData = payload.result
     },
-    updateproductsStatusData(state, { payload }) {
-      const objIndex = state.productData.findIndex((obj) => obj._id === payload.id);
-      if (objIndex >= 0) {
-        state.productData[objIndex].status = payload.status
-      }
+    setTopRatingProductData(state, { payload }) {
+      state.topRatingProductData = payload.result
     },
-    pushproductData(state, { payload }) {
-      state.productData.push(payload)
+    setTopSellerProductData(state, { payload }) {
+      state.topSellerProductData = payload.result
     },
-    sliceproductData(state, { payload }) {
-      const objIndex = state.productData.findIndex((obj) => obj._id === payload);
-      if (objIndex >= 0) {
-        state.productData.splice(objIndex, 1)
-      }
+    setLatestProductData(state, { payload }) {
+      state.latestProductData = payload.result
     },
-
-    isOpenModal(state, { payload }) {
-      state.isOpenModal = payload
-    },
-    ModalToggle(state, { payload }) {
-      state.isOpenModal = !state.isOpenModal
-    },
-    isOpenStatusModal(state, { payload }) {
-      state.isStatusOpenModal = payload
-    },
-    statusToggle(state, { payload }) {
-      state.isStatusOpenModal = !state.isStatusOpenModal
-    }
+   
   }
 })
 
-export const { setproductData, updateproductData, pushproductData, sliceproductData, ModalToggle, isOpenModal, isOpenStatusModal, statusToggle, updateproductsStatusData } = productSlice.actions;
+export const { setTrendingProductData,setFeaturedProductData, setTopRatingProductData,setTopSellerProductData, setLatestProductData  } = productSlice.actions;
 
 export default productSlice.reducer;
 
-export function getproduct(limit, offset, status, keyword) {
-  return async function getproductThunk(dispatch) {
+export function getTrendingproduct() {
+  return async function getTrendingproductThunk(dispatch) {
     dispatch(setLoading(true))
     try {
-      await service.getproduct(limit, offset, status, keyword).then(
+      await service.getTrendingproduct().then(
         (response) => {
           dispatch(setLoading(false))
-          dispatch(setproductData(response.data))
+          dispatch(setTrendingProductData(response.data))
         }, (error) => {
           dispatch(setLoading(false))
-          errorHandler(error.response)
         }
       );
     } catch (err) {
@@ -77,19 +57,16 @@ export function getproduct(limit, offset, status, keyword) {
     }
   }
 }
-export function addproduct(payload) {
-  return async function addproductThunk(dispatch) {
+export function getFeaturedproduct() {
+  return async function getFeaturedproductThunk(dispatch) {
     dispatch(setLoading(true))
     try {
-      await service.addproducts(payload).then(
+      await service.getFeaturedproduct().then(
         (response) => {
-          dispatch(ModalToggle())
           dispatch(setLoading(false))
-          dispatch(pushproductData(response.data))
-          successHandler('Added Successfully')
+          dispatch(setFeaturedProductData(response.data))
         }, (error) => {
           dispatch(setLoading(false))
-          errorHandler(error.response)
         }
       );
     } catch (err) {
@@ -97,19 +74,16 @@ export function addproduct(payload) {
     }
   }
 }
-export function updateproduct(id, name) {
-  return async function updateproductThunk(dispatch) {
+export function getTopRatingPoduct() {
+  return async function getTopRatingPoductThunk(dispatch) {
     dispatch(setLoading(true))
     try {
-      await service.updateproduct(id, name).then(
+      await service.getTopRatingPoduct().then(
         (response) => {
-          dispatch(ModalToggle())
           dispatch(setLoading(false))
-          dispatch(updateproductData(response.data))
-          successHandler('Updated Successfully')
+          dispatch(setTopRatingProductData(response.data))
         }, (error) => {
           dispatch(setLoading(false))
-          errorHandler(error.response)
         }
       );
     } catch (err) {
@@ -117,19 +91,16 @@ export function updateproduct(id, name) {
     }
   }
 }
-
-export function deleteproduct(id) {
-  return async function deleteproductThunk(dispatch) {
+export function getTopSellerproduct() {
+  return async function getTopSellerproductThunk(dispatch) {
+    dispatch(setLoading(true))
     try {
-      dispatch(setLoading(true))
-      await service.deleteproduct(id).then(
+      await service.getTopSellerproduct().then(
         (response) => {
-          dispatch(sliceproductData(id))
           dispatch(setLoading(false))
-          successHandler('Updated Successfully')
+          dispatch(setTopSellerProductData(response.data))
         }, (error) => {
           dispatch(setLoading(false))
-          errorHandler(error.response)
         }
       );
     } catch (err) {
@@ -137,20 +108,16 @@ export function deleteproduct(id) {
     }
   }
 }
-
-export function statusUpdateproducts(payload) {
-  return async function statusUpdateproductsThunk(dispatch) {
+export function getLatestproduct() {
+  return async function getLatestproductThunk(dispatch) {
+    dispatch(setLoading(true))
     try {
-      dispatch(setLoading(true))
-      await service.UpdateStatusProducts(payload).then(
+      await service.getLatestproduct().then(
         (response) => {
-          dispatch(statusToggle())
-          dispatch(updateproductsStatusData(payload))
           dispatch(setLoading(false))
-          successHandler('Updated Successfully')
+          dispatch(setLatestProductData(response.data))
         }, (error) => {
           dispatch(setLoading(false))
-          errorHandler(error.response)
         }
       );
     } catch (err) {

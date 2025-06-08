@@ -13,15 +13,25 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getbanner } from "@/store/bannerSlice";
 import { assetUrl } from "@/shared/_services/api_service";
+import { getFeaturedproduct, getLatestproduct, getTopRatingPoduct, getTopSellerproduct, getTrendingproduct } from "@/store/productSlice";
 
 const Home = () => {
 
   const bannerVar = useSelector(state => state.banner)
+  const productVar = useSelector(state => state.product)
+  console.log(productVar);
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getbanner());
-  }, [dispatch])
+    dispatch(getTrendingproduct());
+    dispatch(getFeaturedproduct());
+    dispatch(getTopRatingPoduct());
+    dispatch(getTopSellerproduct());
+    dispatch(getLatestproduct());
+  }, [])
 
 
 
@@ -64,7 +74,7 @@ const Home = () => {
                     </p>
                     <h2 className="lg:text-5xl text-2xl text-white lg:w-2/3 text-center font-[Nunito] font-bold leading-8 lg:leading-14">
                       {item.description}                </h2>
-                    <Button 
+                    <Button
                       className={`font-[Nunito] bg-white text-black hover:bg-amber-600 hover:text-white cursor-pointer`}
                     >
                       Shop Now
@@ -81,9 +91,11 @@ const Home = () => {
       <section className="px-[4%]">
         <div className="container mx-auto">
           <div className="home_section py-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            <CategoryBox props={b3} />
-            <CategoryBox props={b5} />
-            <CategoryBox props={b6} />
+            {productVar.trendingProductData && productVar.trendingProductData.map((item, index) => (
+
+              <ProductCard item={item} key={index} />
+            ))}
+
           </div>
         </div>
       </section>
@@ -99,9 +111,10 @@ const Home = () => {
               Handpicked Stories for Every Little Reader
             </h2>
             <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+              {productVar.featuredProductData && productVar.featuredProductData.map((item, index) => (
+                <ProductCard item={item} key={index} />
+              ))}
+
             </div>
             <Link to={'/products'}
               className={`bg-black text-white hover:bg-amber-600 hover:text-white cursor-pointer rounded-3xl py-2 px-6`}
@@ -142,12 +155,9 @@ const Home = () => {
               </div>
             </div>
             <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+              {productVar.topRatingProductData && productVar.topRatingProductData.map((item, index) => (
+                <ProductCard item={item} key={index} />
+              ))}
             </div>
             <Button
               className={`bg-amber-600 text-white hover:bg-black hover:text-white cursor-pointer py-4 px-8 self-center`}
