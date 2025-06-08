@@ -25,51 +25,51 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "@/features/Categories/categorySlice";
-import { fetchAllProducts } from "@/features/Products/productsSlice";
+import { getAllproduct, getAlltProductData } from "@/store/productSlice";
 
 const Products = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
-  const { products, isLoading, isError } = useSelector(
-    (state) => state.products
-  );
+  const productVar = useSelector((state) => state.product);
 
-  const [filters, setActiveFilters] = useState({
-    categoryId: "",
-    price: [0, 0],
-    age: [0, 0],
-  });
+  const [formData, setFormData] = useState({
+    limit: 9,
+    offset: 0,
+    categoryId: '',
+    minPrice: '',
+    maxPrice: '',
+    minAge: '',
+    maxAge: '',
+
+
+  })
+
+
 
   useEffect(() => {
     dispatch(fetchCategories());
-    dispatch(fetchAllProducts());
+    dispatch(getAllproduct(formData.limit, formData.offset, formData.categoryId, formData.minPrice, formData.maxPrice, formData.minAge, formData.maxAge,));
   }, [dispatch]);
 
-  useEffect(() => {
-    const activeFilter = {
-      ...(filters.categoryId && { categoryId: filters.categoryId }),
-      ...(filters.price && {
-        minPrice: filters.price[0],
-        maxPrice: filters.price[1],
-      }),
-      ...(filters.age && { minAge: filters.age[0], maxAge: filters.age[1] }),
-    };
 
-    dispatch(fetchAllProducts(activeFilter));
-  }, [dispatch, filters]);
+   useEffect(() => {
+    dispatch(
+      getAllproduct(
+        formData.limit,
+        formData.offset,
+        formData.categoryId,
+        formData.minPrice,
+        formData.maxPrice,
+        formData.minAge,
+        formData.maxAge
+      )
+    );
+  }, [formData, dispatch]);
 
   const handleCategory = (index, categoryId) => {
-    if (activeCategory === index) {
-      setActiveCategory(null);
-    } else {
-      setActiveCategory(index);
-    }
-
-    setActiveFilters((prev) => ({
-      ...prev,
-      categoryId: prev.categoryId === categoryId ? "" : categoryId,
-    }));
+    setActiveCategory(index);
+    setFormData((prev) => ({ ...prev, categoryId: categoryId }));
   };
 
   return (
@@ -95,11 +95,10 @@ const Products = () => {
                 <div className="categories flex items-center flex-wrap gap-2 w-full">
                   {categories.map((item, index) => (
                     <div
-                      className={` ${
-                        activeCategory === index
-                          ? "bg-orange-200 text-amber-600 border border-amber-600"
-                          : ""
-                      } box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-sm hover:bg-zinc-100`}
+                      className={` ${activeCategory === index
+                        ? "bg-orange-200 text-amber-600 border border-amber-600"
+                        : ""
+                        } box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-sm hover:bg-zinc-100`}
                       key={index}
                       onClick={() => handleCategory(index, item?._id)}
                     >
@@ -114,8 +113,12 @@ const Products = () => {
                 <Slider
                   range
                   defaultValue={[0, 1000]}
-                  onChange={(value) => {
-                    setActiveFilters((prev) => ({ ...prev, price: value }));
+                  hange={(value) => {
+                    setFormData((prev) => ({
+                      ...prev,
+                      minPrice: value[0],
+                      maxPrice: value[1],
+                    }));
                   }}
                   min={0}
                   max={1000}
@@ -158,11 +161,10 @@ const Products = () => {
                     <div className="categories flex items-center flex-wrap gap-2 w-full">
                       {categories.map((item, index) => (
                         <div
-                          className={` ${
-                            activeCategory === index
-                              ? "bg-orange-200 text-amber-600 border border-amber-600"
-                              : ""
-                          } box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-sm hover:bg-zinc-100`}
+                          className={` ${activeCategory === index
+                            ? "bg-orange-200 text-amber-600 border border-amber-600"
+                            : ""
+                            } box border-zinc-400 border py-1 px-3 cursor-pointer rounded-3xl font-[Nunito] text-sm hover:bg-zinc-100`}
                           key={index}
                           onClick={() => handleCategory(index)}
                         >
@@ -218,20 +220,9 @@ const Products = () => {
 
           <div className="right w-full lg:w-6/8 flex flex-col justify-center items-center gap-10">
             <div className="boxes w-full grid grid-cols-2 md:grid-cols-3 gap-4 gap-y-6">
-              {!isLoading &&
-                products?.result?.map((product, index) => (
-                  <MainProductCard key={index} product={product} />
-                ))}
-              {isLoading &&
-                [1, 2, 3, 4, 5].map((index) => (
-                  <div className="flex flex-col space-y-3" key={index}>
-                    <Skeleton className="lg:h-[200px] h-[120px] md:h-[170px] w-full rounded-xl" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-full" />
-                      <Skeleton className="h-4 md:w-3/4 w-full" />
-                    </div>
-                  </div>
-                ))}
+              {productVar?.allProductData.map((product, index) => (
+                <MainProductCard key={index} product={product} />
+              ))}
             </div>
             <Pagination>
               <PaginationContent>

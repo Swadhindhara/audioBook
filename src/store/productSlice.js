@@ -8,6 +8,7 @@ const initialState = {
   topRatingProductData: [],
   topSellerProductData: [],
   latestProductData: [],
+  allProductData: [],
   totalproduct: 0,
 
 }
@@ -19,7 +20,7 @@ export const productSlice = createSlice({
     setTrendingProductData(state, { payload }) {
       state.trendingProductData = payload.result
     },
-   
+
     setFeaturedProductData(state, { payload }) {
       state.featuredProductData = payload.result
     },
@@ -32,11 +33,14 @@ export const productSlice = createSlice({
     setLatestProductData(state, { payload }) {
       state.latestProductData = payload.result
     },
-   
+    getAlltProductData(state, { payload }) {
+      state.allProductData = payload.result
+    },
+
   }
 })
 
-export const { setTrendingProductData,setFeaturedProductData, setTopRatingProductData,setTopSellerProductData, setLatestProductData  } = productSlice.actions;
+export const { setTrendingProductData, setFeaturedProductData, setTopRatingProductData, setTopSellerProductData, setLatestProductData, getAlltProductData } = productSlice.actions;
 
 export default productSlice.reducer;
 
@@ -116,6 +120,23 @@ export function getLatestproduct() {
         (response) => {
           dispatch(setLoading(false))
           dispatch(setLatestProductData(response.data))
+        }, (error) => {
+          dispatch(setLoading(false))
+        }
+      );
+    } catch (err) {
+
+    }
+  }
+}
+export function getAllproduct(limit, offset,  catrgoryId,  minPrice,  maxPrice,  minAge,  maxAge) {
+  return async function getAllproductThunk(dispatch) {
+    dispatch(setLoading(true))
+    try {
+      await service.getAllproduct(limit, offset,  catrgoryId,  minPrice,  maxPrice,  minAge,  maxAge).then(
+        (response) => {
+          dispatch(setLoading(false))
+          dispatch(getAlltProductData(response.data))
         }, (error) => {
           dispatch(setLoading(false))
         }

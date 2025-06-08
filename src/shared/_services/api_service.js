@@ -56,6 +56,10 @@ async function getLatestproduct() {
   return await axios.get(productURL + '/latest', {
   });
 }
+async function getAllproduct(limit, offset,  categoryId,  minPrice,  maxPrice,  minAge,  maxAge) {  
+  return await axios.get(productURL + `/all?limit=${limit}&offset=${offset}&categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}&minAge=${minAge}&maxAge=${maxAge}`, {
+  });
+}
 
 
 
@@ -66,7 +70,7 @@ export const service = {
 
   pagesData,
 
-  getTrendingproduct, getFeaturedproduct, getTopRatingPoduct, getTopSellerproduct, getLatestproduct
+  getTrendingproduct, getFeaturedproduct, getTopRatingPoduct, getTopSellerproduct, getLatestproduct, getAllproduct
 
 
 

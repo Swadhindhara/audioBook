@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import categoryReducer from './../features/Categories/categorySlice';
-import productsReducer from '../features/Products/productsSlice';
+// import productsReducer from '../features/Products/productsSlice';
 import authReducer from '../features/Auth/authSlice';
 import userReducer from '../features/User/userSlice'
 
@@ -16,7 +16,7 @@ import productReducer from './productSlice';
 const store = configureStore({
     reducer: {
         categories: categoryReducer,
-        products: productsReducer,
+        // products: productsReducer,
         user: authReducer,
         LogProfile: userReducer,
         
