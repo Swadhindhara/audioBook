@@ -9,6 +9,7 @@ import { CategoryBox, ProductCard } from "@/_components";
 import b5 from "../assets/images/b5.jpg";
 import b6 from "../assets/images/b6.jpg";
 import b3 from "../assets/images/b3.jpg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -121,11 +122,11 @@ const Home = () => {
               <ProductCard />
               <ProductCard />
             </div>
-            <Button
-              className={`bg-black text-white hover:bg-amber-600 hover:text-white cursor-pointer rounded-3xl py-5 px-6`}
+            <Link to={'/products'}
+              className={`bg-black text-white hover:bg-amber-600 hover:text-white cursor-pointer rounded-3xl py-2 px-6`}
             >
               Browse All Collection
-            </Button>
+            </Link>
           </div>
         </div>
       </section>
