@@ -12,12 +12,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { useGoogleLogin } from "@react-oauth/google";
+import { useDispatch, useSelector } from "react-redux";
+import { loginProfile } from "@/features/Auth/authSlice";
+import { fetchProfile } from "@/features/User/userSlice";
 
 const Header = () => {
   const location = useLocation();
-  const authStatus = false;
+  const dispatch = useDispatch()
+  const {user} = useSelector((state) => state.user)
 
   const handleLogin = () => {
     console.log("HI");
@@ -45,6 +48,13 @@ const Header = () => {
 
         const profile = await res.json();
         console.log("User Profile:", profile);
+
+        dispatch(loginProfile({
+          name: profile?.name,
+          email: profile?.email,
+          profileImage: profile?.picture
+        }))
+        // dispatch(fetchProfile());
 
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -83,7 +93,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="right flex items-center justify-end gap-5 w-1/3">
-              {authStatus ? (
+              {localStorage.getItem("token") ? (
                 <Link to={"/profile"}>
                   <img
                     src={avatar}
@@ -91,13 +101,13 @@ const Header = () => {
                     className="rounded-full w-8 h-8 object-cover"
                   />
                 </Link>
-              ) : (
+              ) : ( 
                 <Link>
-                  <DialogTrigger>
-                    <User className="text-white" />
-                  </DialogTrigger>
+                  {/* <DialogTrigger> */}
+                    <User className="text-white cursor-pointer" onClick={() => login()}/>
+                  {/* </DialogTrigger> */}
                 </Link>
-              )}
+               )}
               <Link to={"/wishlist"}>
                 <Heart className="text-white" />
               </Link>
@@ -111,10 +121,9 @@ const Header = () => {
           </div>
         </div>
 
-        <DialogContent className={`w-fit`}>
+        {/* <DialogContent className={`w-fit`}>
           <DialogHeader>
             <DialogTitle>
-              {/* <img src={logo} alt="" /> */}
               <h1 className="font-[Nunito] font-bold text-3xl text-center">
                 LOGO
               </h1>
@@ -140,7 +149,7 @@ const Header = () => {
               </Button>
             </DialogDescription>
           </DialogHeader>
-        </DialogContent>
+        </DialogContent> */}
       </div>
     </>
   );

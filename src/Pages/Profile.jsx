@@ -34,8 +34,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/features/Auth/authSlice";
+import { fetchProfile, updateUser } from "@/features/User/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -45,7 +50,30 @@ const Profile = () => {
   } = useForm();
   // const [profile, setProfile] = useState(null);
   const [step, setStep] = useState(1);
-  const password = watch("password");
+  // const password = watch("password");
+  
+  const { user, isLoading } = useSelector((state) => state.LogProfile)
+  const navigate = useNavigate()
+  const handleLogout = () =>{
+    dispatch(logout())
+    navigate('/')
+  }
+
+  useEffect(() => {
+    dispatch(fetchProfile());    
+  }, [dispatch]);
+
+   const handleUpdate = (data) => {
+    dispatch(
+      updateUser({ name: data.name, email: data.email, number: data.number })
+    );
+  };
+
+  // useEffect(() => {
+  //   if (user && step === 1) {
+  //     reset({ name: user.name, email: user.email, number: user.phoneNumber });
+  //   }
+  // }, [user, step]);
 
 
   return (
@@ -60,7 +88,7 @@ const Profile = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className={`cursor-pointer border-orange-400 border text-amber-600 hover:bg-amber-600 hover:text-white`}>Cancel</AlertDialogCancel>
-          <AlertDialogAction className={`cursor-pointer bg-amber-600 hover:bg-black hover:text-white`}>Continue</AlertDialogAction>
+          <AlertDialogAction className={`cursor-pointer bg-amber-600 hover:bg-black hover:text-white`} onClick={handleLogout}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
       <div className="main px-4">
@@ -113,7 +141,7 @@ const Profile = () => {
                         // onClick={handleLogout}
                         className="tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-orange-50 w-3/4 px-2 py-2 transition-all duration-300 ease"
                       >
-                        <AlertDialogTrigger className='flex items-center gap-4 cursor-pointer w-full'>
+                        <AlertDialogTrigger className='flex items-center gap-4 cursor-pointer w-full' >
                           <div className="icon p-2 border-red-600 border rounded-sm">
                             <LogOutIcon className="text-red-600" />
                           </div>
@@ -127,6 +155,7 @@ const Profile = () => {
                       <p className="text-lg font-semibold mb-3">Edit Profile</p>
                       <form
                         className="box w-full"
+                        onSubmit={handleSubmit((data) => console.log(data))}
                       >
                         <div className="right w-full lg:w-full flex gap-5 items-center lg:items-start flex-col-reverse lg:flex-row">
                           <div className="left w-full lg:w-2/3 flex flex-col items-start gap-4">
@@ -148,10 +177,10 @@ const Profile = () => {
                               )}
                             </div>
                             <div className="box flex flex-col gap-2 w-full">
-                              <label htmlFor="name">Mobile Number</label>
+                              <label htmlFor="number">Mobile Number</label>
                               <Input
                                 type="number"
-                                {...register("name", {
+                                {...register("number", {
                                   pattern: {
                                     value: /^[a-zA-Z\s]+$/,
                                     message: "Please enter a mobile number.",
