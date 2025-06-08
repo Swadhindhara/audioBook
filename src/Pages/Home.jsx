@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,15 +10,28 @@ import b5 from "../assets/images/b5.jpg";
 import b6 from "../assets/images/b6.jpg";
 import b3 from "../assets/images/b3.jpg";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getbanner } from "@/store/bannerSlice";
+import { assetUrl } from "@/shared/_services/api_service";
 
 const Home = () => {
+
+  const bannerVar = useSelector(state => state.banner)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getbanner());
+  }, [dispatch])
+
+
+
   return (
     <>
       {/* ===================== Section 1 =========================== */}
       <section className="home_section1_container lg:mt-[-80px] ">
         <div className="home_section1">
           <Swiper
-            spaceBetween={5}
+            spaceBetween={0}
             centeredSlides={true}
             speed={1200}
             loop={true}
@@ -32,66 +45,34 @@ const Home = () => {
             modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper h-[40dvh] lg:h-screen"
           >
-            <SwiperSlide className="bg-[url(./assets/images/b1.jpg)] bg-no-repeat bg-cover bg-center w-full">
-              <div className="flex items-center justify-center flex-col h-full gap-4 lg:gap-5 bg-linear-to-t from-black bg-transparent px-[3%]">
-                <p className="text-white text-lg lg:text-2xl uppercase font-[Rubik]">
-                  Lorem, ipsum.
-                </p>
-                <h2 className="lg:text-5xl text-2xl text-white lg:w-2/3 text-center font-[Nunito] font-bold leading-8 lg:leading-14">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                </h2>
-                <Button
-                  className={`font-[Nunito] bg-white text-black hover:bg-amber-600 hover:text-white cursor-pointer`}
-                >
-                  Shop Now
-                </Button>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="bg-[url(./assets/images/b1.jpg)] bg-no-repeat bg-cover bg-center w-full">
-              <div className="flex items-center justify-center flex-col h-full gap-4 lg:gap-5 bg-linear-to-t from-black bg-transparent px-[3%]">
-                <p className="text-white text-lg lg:text-2xl uppercase font-[Rubik]">
-                  Lorem, ipsum.
-                </p>
-                <h2 className="lg:text-5xl text-2xl text-white lg:w-2/3 text-center font-[Nunito] font-bold leading-8 lg:leading-14">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                </h2>
-                <Button
-                  className={`font-[Nunito] bg-white text-black hover:bg-amber-600 hover:text-white cursor-pointer`}
-                >
-                  Shop Now
-                </Button>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="bg-[url(./assets/images/b1.jpg)] bg-no-repeat bg-cover bg-center w-full">
-              <div className="flex items-center justify-center flex-col h-full gap-4 lg:gap-5 bg-linear-to-t from-black bg-transparent px-[3%]">
-                <p className="text-white text-lg lg:text-2xl uppercase font-[Rubik]">
-                  Lorem, ipsum.
-                </p>
-                <h2 className="lg:text-5xl text-2xl text-white lg:w-2/3 text-center font-[Nunito] font-bold leading-8 lg:leading-14">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                </h2>
-                <Button
-                  className={`font-[Nunito] bg-white text-black hover:bg-amber-600 hover:text-white cursor-pointer`}
-                >
-                  Shop Now
-                </Button>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide className="bg-[url(./assets/images/b1.jpg)] bg-no-repeat bg-cover bg-center w-full">
-              <div className="flex items-center justify-center flex-col h-full gap-4 lg:gap-5 bg-linear-to-t from-black bg-transparent px-[3%]">
-                <p className="text-white text-lg lg:text-2xl uppercase font-[Rubik]">
-                  Lorem, ipsum.
-                </p>
-                <h2 className="lg:text-5xl text-2xl text-white lg:w-2/3 text-center font-[Nunito] font-bold leading-8 lg:leading-14">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
-                </h2>
-                <Button
-                  className={`font-[Nunito] bg-white text-black hover:bg-amber-600 hover:text-white cursor-pointer`}
-                >
-                  Shop Now
-                </Button>
-              </div>
-            </SwiperSlide>
+
+            {bannerVar.bannerData.map((item, index) => {
+              const cleanedPath = item.image.replace(/\\/g, '/');
+              const imageUrl = `${assetUrl}${cleanedPath}`;
+
+              return (
+                <SwiperSlide style={{
+                  backgroundImage: `url(${imageUrl})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  width: '100%',
+                }} >
+                  <div className="flex items-center justify-center flex-col h-full gap-4 lg:gap-5 bg-linear-to-t from-black bg-transparent px-[3%]">
+                    <p className="text-white text-lg lg:text-2xl uppercase font-[Rubik]">
+                      {item.title}
+                    </p>
+                    <h2 className="lg:text-5xl text-2xl text-white lg:w-2/3 text-center font-[Nunito] font-bold leading-8 lg:leading-14">
+                      {item.description}                </h2>
+                    <Button 
+                      className={`font-[Nunito] bg-white text-black hover:bg-amber-600 hover:text-white cursor-pointer`}
+                    >
+                      Shop Now
+                    </Button>
+                  </div>
+                </SwiperSlide>
+              )
+            })}
           </Swiper>
         </div>
       </section>

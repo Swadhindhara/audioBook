@@ -1,16 +1,18 @@
-import { fetchPageData } from '@/features/Pages/PageSlice';
+import { pagesData } from '@/store/pagesSlice';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Privacy = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.page)
+  const pageData = useSelector(state => state.page)
+  console.log(pageData);
+  
 
   useEffect(() => {
-    dispatch(fetchPageData(1))
+    dispatch(pagesData(1))
   }, [dispatch])
   return (
-    <div>privacy</div>
+<div dangerouslySetInnerHTML={{ __html: pageData.pageDesc }} />
   )
 }
 

@@ -3,15 +3,8 @@ import { Button } from "./components/ui/button";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   About,
-  Contact,
-  Error,
-  Home,
-  Privacy,
-  ProductDetails,
-  Products,
-  Profile,
-  Wishlist,
-} from "./Pages";
+  Contact,  Error,  Home,  Privacy,  ProductDetails,
+  Products,  Profile,  Wishlist,} from "./Pages";
 import Header from "./_components/Header.jsx";
 import { Footer, ScrollTo } from "./_components";
 import { Dialog } from "./components/ui/dialog";
