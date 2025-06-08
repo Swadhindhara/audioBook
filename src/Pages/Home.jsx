@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -13,14 +13,31 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getbanner } from "@/store/bannerSlice";
 import { assetUrl } from "@/shared/_services/api_service";
-import { getFeaturedproduct, getLatestproduct, getTopRatingPoduct, getTopSellerproduct, getTrendingproduct } from "@/store/productSlice";
+import {
+  getFeaturedproduct,
+  getLatestproduct,
+  getTopRatingPoduct,
+  getTopSellerproduct,
+  getTrendingproduct,
+} from "@/store/productSlice";
 
 const Home = () => {
-
-  const bannerVar = useSelector(state => state.banner)
-  const productVar = useSelector(state => state.product)
+  const [step, setStep] = useState(1);
+  const [active, setActive] = useState(0);
+  const tabs = [
+    {
+      name: "top rating",
+    },
+    {
+      name: "top seller",
+    },
+    {
+      name: "latest product",
+    },
+  ];
+  const bannerVar = useSelector((state) => state.banner);
+  const productVar = useSelector((state) => state.product);
   console.log(productVar);
-
 
   const dispatch = useDispatch();
 
@@ -31,9 +48,7 @@ const Home = () => {
     dispatch(getTopRatingPoduct());
     dispatch(getTopSellerproduct());
     dispatch(getLatestproduct());
-  }, [])
-
-
+  }, []);
 
   return (
     <>
@@ -55,25 +70,27 @@ const Home = () => {
             modules={[Autoplay, Pagination, Navigation]}
             className="mySwiper h-[40dvh] lg:h-screen"
           >
-
             {bannerVar.bannerData.map((item, index) => {
-              const cleanedPath = item.image.replace(/\\/g, '/');
+              const cleanedPath = item.image.replace(/\\/g, "/");
               const imageUrl = `${assetUrl}${cleanedPath}`;
 
               return (
-                <SwiperSlide style={{
-                  backgroundImage: `url(${imageUrl})`,
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  width: '100%',
-                }} >
+                <SwiperSlide
+                  style={{
+                    backgroundImage: `url(${imageUrl})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    width: "100%",
+                  }}
+                >
                   <div className="flex items-center justify-center flex-col h-full gap-4 lg:gap-5 bg-linear-to-t from-black bg-transparent px-[3%]">
                     <p className="text-white text-lg lg:text-2xl uppercase font-[Rubik]">
                       {item.title}
                     </p>
                     <h2 className="lg:text-5xl text-2xl text-white lg:w-2/3 text-center font-[Nunito] font-bold leading-8 lg:leading-14">
-                      {item.description}                </h2>
+                      {item.description}{" "}
+                    </h2>
                     <Button
                       className={`font-[Nunito] bg-white text-black hover:bg-amber-600 hover:text-white cursor-pointer`}
                     >
@@ -81,7 +98,7 @@ const Home = () => {
                     </Button>
                   </div>
                 </SwiperSlide>
-              )
+              );
             })}
           </Swiper>
         </div>
@@ -91,11 +108,10 @@ const Home = () => {
       <section className="px-[4%]">
         <div className="container mx-auto">
           <div className="home_section py-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {productVar.trendingProductData && productVar.trendingProductData.map((item, index) => (
-
-              <ProductCard item={item} key={index} />
-            ))}
-
+            {productVar.trendingProductData &&
+              productVar.trendingProductData.map((item, index) => (
+                <ProductCard item={item} key={index} />
+              ))}
           </div>
         </div>
       </section>
@@ -111,12 +127,13 @@ const Home = () => {
               Handpicked Stories for Every Little Reader
             </h2>
             <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
-              {productVar.featuredProductData && productVar.featuredProductData.map((item, index) => (
-                <ProductCard item={item} key={index} />
-              ))}
-
+              {productVar.featuredProductData &&
+                productVar.featuredProductData.map((item, index) => (
+                  <ProductCard item={item} key={index} />
+                ))}
             </div>
-            <Link to={'/products'}
+            <Link
+              to={"/products"}
               className={`bg-black text-white hover:bg-amber-600 hover:text-white cursor-pointer rounded-3xl py-2 px-6`}
             >
               Browse All Collection
@@ -144,21 +161,49 @@ const Home = () => {
         <div className="container mx-auto  section">
           <div className="home_section4 py-10 flex items-start lg:items-center justify-center flex-col gap-10 ">
             <div className="tabs tabs_scroll flex items-center md:justify-center gap-10 py-4 w-full overflow-auto">
-              <div className="tab whitespace-nowrap text-lg md:text-xl lg:text-2xl font-[Nunito] font-bold uppercase border-b-[3px] border-b-amber-600">
-                Top rating
-              </div>
-              <div className="tab whitespace-nowrap text-lg md:text-xl lg:text-2xl font-[Nunito] font-bold uppercase">
-                Top sellers
-              </div>
-              <div className="tab whitespace-nowrap text-lg md:text-xl lg:text-2xl font-[Nunito] font-bold uppercase">
-                latest products
-              </div>
-            </div>
-            <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
-              {productVar.topRatingProductData && productVar.topRatingProductData.map((item, index) => (
-                <ProductCard item={item} key={index} />
+              {tabs.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    setStep(index + 1);
+                    setActive(index);
+                  }}
+                  className={`${
+                    active === index ? "border-b-amber-600" : "border-b-white"
+                  } tab cursor-pointer whitespace-nowrap text-lg md:text-xl lg:text-2xl font-[Nunito] font-bold uppercase border-b-[3px]`}
+                >
+                  {item.name}
+                </div>
               ))}
             </div>
+            {step === 1 && (
+              <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
+                {productVar.topRatingProductData &&
+                  productVar.topRatingProductData.map((item, index) => (
+                    <ProductCard item={item} key={index} />
+                  ))}
+              </div>
+            )}
+            {step === 2 && (
+              <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
+                {productVar.topSellerProductData &&
+                  productVar.topSellerProductData
+                    .slice(0, 5)
+                    .map((item, index) => (
+                      <ProductCard item={item} key={index} />
+                    ))}
+              </div>
+            )}
+            {step === 3 && (
+              <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
+                {productVar.latestProductData &&
+                  productVar.latestProductData
+                    .slice(0, 4)
+                    .map((item, index) => (
+                      <ProductCard item={item} key={index} />
+                    ))}
+              </div>
+            )}
             <Button
               className={`bg-amber-600 text-white hover:bg-black hover:text-white cursor-pointer py-4 px-8 self-center`}
             >
