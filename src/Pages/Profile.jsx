@@ -138,7 +138,7 @@ const Profile = () => {
                   {step === 1 && (
                     <div className="lg:w-2/3 w-full">
                       <p className="text-lg font-semibold mb-3">Edit Profile</p>
-                      <MyProfile props={profileVar.user}/>
+                      <MyProfile user={profileVar.user}/>
                     </div>
                   )}
 
@@ -148,7 +148,7 @@ const Profile = () => {
                       <p>All Subscriptions</p>
                       {orderVar.orderHistory &&
                         <div className="boxes Subscriptions_boxes w-full h-77 overflow-y-auto flex flex-col gap-5 p-1">
-                          <div className="box relative border border-zinc-300 shadow rounded-lg flex items-center gap-4">
+                          <div className="box relative border border-zinc-300 shadow rounded-lg flex items-center gap-4 p-3">
                             {/* <div className="left w-1/5"> */}
                             {/* <img src={b3} alt="" className="w-full block h-[120px] object-cover rounded-lg shadow-xl" /> */}
                             {/* </div> */}
