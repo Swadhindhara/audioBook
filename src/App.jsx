@@ -3,7 +3,7 @@ import { Button } from "./components/ui/button";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import {
   About,
-  Contact,  Error,  Home,  Plans,  Privacy,  ProductDetails,
+  Contact,  Error,  Home,  PaymentFailed,  PaymentSuccess,  Plans,  Privacy,  ProductDetails,
   Products,  Profile,  Wishlist,} from "./Pages";
 import Header from "./_components/Header.jsx";
 import { Footer, ScrollTo } from "./_components";
@@ -28,6 +28,8 @@ const App = () => {
               <Route path="/about" element={<About />} />
               <Route path="/privacy-policy" element={<Privacy />} />
               <Route path="/plans" element={<Plans />} />
+              <Route path="/payment-successful" element={<PaymentSuccess />} />
+              <Route path="/payment-failed" element={<PaymentFailed />} />
               <Route path="*" element={<Error />} />
             </Routes>
             <Footer />
