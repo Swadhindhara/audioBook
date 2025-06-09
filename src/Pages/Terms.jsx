@@ -2,12 +2,12 @@ import { pagesData } from "@/store/pagesSlice";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const Privacy = () => {
+const Terms = () => {
   const dispatch = useDispatch();
   const pageData = useSelector((state) => state.page);
 
   useEffect(() => {
-    dispatch(pagesData(1));
+    dispatch(pagesData(2));
   }, [dispatch]);
   return (
     <div className="main py-10 px-[4%] min-h-screen">
@@ -18,4 +18,4 @@ const Privacy = () => {
   );
 };
 
-export default Privacy;
+export default Terms;

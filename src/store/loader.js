@@ -20,7 +20,6 @@ export const loadingSlice = createSlice({
       state.loading=payload
     },
     changeBodyClass(state, { payload }) {
-      console.log(payload);
       state.bodyClass=payload
     },
   }

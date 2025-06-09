@@ -37,8 +37,6 @@ const Home = () => {
   ];
   const bannerVar = useSelector((state) => state.banner);
   const productVar = useSelector((state) => state.product);
-  console.log(productVar);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

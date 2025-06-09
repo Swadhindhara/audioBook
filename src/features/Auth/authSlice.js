@@ -6,7 +6,7 @@ export const loginProfile = createAsyncThunk("auth/google/login", async(userData
     try {
         const response = await authAPI.loginUser(userData);
         if(response){
-            localStorage.setItem("token", JSON.stringify(response.token));
+            localStorage.setItem("token", response.token);
             return authAPI.getProfile();
         }
     } catch (error) {

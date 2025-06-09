@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "./../assets/images/logo.svg";
 import { Heart, ShoppingBag, User } from "lucide-react";
@@ -16,15 +16,27 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useDispatch, useSelector } from "react-redux";
 import { loginProfile } from "@/features/Auth/authSlice";
 import { fetchProfile } from "@/features/User/userSlice";
+import { localService } from "@/shared/_session/local";
+import { myOrders } from "@/store/orderSlice";
 
 const Header = () => {
   const location = useLocation();
   const dispatch = useDispatch()
-  const {user} = useSelector((state) => state.user)
+  const { user } = useSelector((state) => state.user)
+  const orderVar = useSelector((state) => state.order);
+
 
   const handleLogin = () => {
-    console.log("HI");
   };
+
+  useEffect(() => {
+    const token = localService.get('token');
+    if (token) {
+      dispatch(myOrders())
+    }
+
+  }, [])
+
 
   const menu = [
     { name: "Home", url: "/" },
@@ -47,7 +59,6 @@ const Header = () => {
         );
 
         const profile = await res.json();
-        console.log("User Profile:", profile);
 
         dispatch(loginProfile({
           name: profile?.name,
@@ -70,9 +81,8 @@ const Header = () => {
         <p className="text-sm">SAVE 20% ON YOUR FIRST ORDER! DON'T MISS OUT. <span className="text-primary cursor-pointer">CLAIM YOUR DISCOUNT</span></p>
       </div> */}
       <div
-        className={`header_container bg-black py-4 z-10 relative px-[4%] ${
-          location.pathname === "/" ? "lg:bg-transparent" : "bg-black"
-        }`}
+        className={`header_container bg-black py-4 z-10 relative px-[4%] ${location.pathname === "/" ? "lg:bg-transparent" : "bg-black"
+          }`}
       >
         <div className="container m-auto">
           <div className="header flex items-center justify-between">
@@ -101,14 +111,14 @@ const Header = () => {
                     className="rounded-full w-8 h-8 object-cover"
                   />
                 </Link>
-              ) : ( 
+              ) : (
                 <Link>
                   {/* <DialogTrigger> */}
-                    <User className="text-white cursor-pointer" onClick={() => login()}/>
+                  <User className="text-white cursor-pointer" onClick={() => login()} />
                   {/* </DialogTrigger> */}
                 </Link>
-               )}
-              <Link to={"/wishlist"}>
+              )}
+              {/* <Link to={"/wishlist"}>
                 <Heart className="text-white" />
               </Link>
               <Link className="relative" to={"/cart"}>
@@ -116,7 +126,7 @@ const Header = () => {
                 <div className="car_value absolute w-4 h-4 bg-amber-600 top-[-6px] right-[-6px] flex items-center justify-center text-sm rounded-full">
                   0
                 </div>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

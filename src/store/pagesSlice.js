@@ -41,8 +41,6 @@ export function pagesData(pageId) {
       await service.pagesData(pageId).then(
         (response) => {
           if (response.data) {
-            console.log(response);
-            
             dispatch(setLoading(false))
             dispatch(setOnePageData(response.data))
           }

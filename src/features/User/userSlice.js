@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 export const fetchProfile = createAsyncThunk('get/profile', async(_, thunkAPI) => {
     try {
-        const response = await userAPI.getProfile();
+        const response = await userAPI.getProfile();        
         return response;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message || 'Not getting profile')
@@ -14,7 +14,6 @@ export const fetchProfile = createAsyncThunk('get/profile', async(_, thunkAPI) =
 export const updateUser = createAsyncThunk('user/updateUser', async (userData, thunkAPI) => {
     try {
         const response = await userAPI.updateProfile(userData);
-        console.log(response, "Updated profile");
         return response;
     } catch (error) {
         thunkAPI.rejectWithValue(error.message || "Failed to update user");

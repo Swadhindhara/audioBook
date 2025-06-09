@@ -10,6 +10,7 @@ const initialState = {
   latestProductData: [],
   allProductData: [],
   totalproduct: 0,
+  singleProductData: {}
 
 }
 
@@ -36,11 +37,14 @@ export const productSlice = createSlice({
     getAlltProductData(state, { payload }) {
       state.allProductData = payload.result
     },
+    getSingletProductData(state, { payload }) {
+      state.singleProductData = payload.result
+    },
 
   }
 })
 
-export const { setTrendingProductData, setFeaturedProductData, setTopRatingProductData, setTopSellerProductData, setLatestProductData, getAlltProductData } = productSlice.actions;
+export const { setTrendingProductData, setFeaturedProductData, setTopRatingProductData, setTopSellerProductData, setLatestProductData, getAlltProductData, getSingletProductData } = productSlice.actions;
 
 export default productSlice.reducer;
 
@@ -137,6 +141,25 @@ export function getAllproduct(limit, offset,  catrgoryId,  minPrice,  maxPrice, 
         (response) => {
           dispatch(setLoading(false))
           dispatch(getAlltProductData(response.data))
+        }, (error) => {
+          dispatch(setLoading(false))
+        }
+      );
+    } catch (err) {
+
+    }
+  }
+}
+
+
+export function getProductById(id) {
+  return async function getProductByIdThunk(dispatch) {
+    dispatch(setLoading(true))
+    try {
+      await service.getProductById(id).then(
+        (response) => {
+          dispatch(setLoading(false))
+          dispatch(getSingletProductData(response.data))
         }, (error) => {
           dispatch(setLoading(false))
         }

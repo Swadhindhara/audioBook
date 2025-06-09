@@ -12,6 +12,8 @@ const categoryURL = rootUrl + 'category';
 const bannerURL = rootUrl + 'banners';
 const pagesURL = rootUrl + "pages";
 const productURL = rootUrl + "product";
+const subscriptionURL = rootUrl + "subscription";
+const orderURL = rootUrl + "order";
 
 
 
@@ -24,7 +26,7 @@ const productURL = rootUrl + "product";
 
 
 async function getbanner() {
-  return await axios.get( bannerURL);
+  return await axios.get(bannerURL);
 }
 
 
@@ -56,8 +58,34 @@ async function getLatestproduct() {
   return await axios.get(productURL + '/latest', {
   });
 }
-async function getAllproduct(limit, offset,  categoryId,  minPrice,  maxPrice,  minAge,  maxAge) {  
+async function getAllproduct(limit, offset, categoryId, minPrice, maxPrice, minAge, maxAge) {
   return await axios.get(productURL + `/all?limit=${limit}&offset=${offset}&categoryId=${categoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}&minAge=${minAge}&maxAge=${maxAge}`, {
+  });
+}
+async function getProductById(id) {
+  return await axios.get(productURL + '/byId/' + id, {
+  });
+}
+/****Subscrip */
+async function getsubscription() {
+  return await axios.get(subscriptionURL)
+}
+
+
+/****Subscrip */
+async function generateOrder(price, subscriptionId) {
+  return await axios.get(orderURL + '/generateOrder?price=' + price + '&subscriptionId=' + subscriptionId)
+}
+async function confirmOrder(transactionId) {
+  return await axios.post(orderURL + '/confirm', {
+    paymentIntentId: transactionId
+  }, {
+    headers: await authHeader(),
+  });
+}
+async function myOrders() {
+  return await axios.get(orderURL + '/myOrders', {
+    headers: await authHeader(),
   });
 }
 
@@ -70,9 +98,11 @@ export const service = {
 
   pagesData,
 
-  getTrendingproduct, getFeaturedproduct, getTopRatingPoduct, getTopSellerproduct, getLatestproduct, getAllproduct
+  getTrendingproduct, getFeaturedproduct, getTopRatingPoduct, getTopSellerproduct, getLatestproduct, getAllproduct, getProductById,
 
+  getsubscription,
 
+  generateOrder, confirmOrder, myOrders,
 
 
 }

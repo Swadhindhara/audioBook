@@ -9,10 +9,23 @@ import { IoLanguage } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 import { IoClose } from "react-icons/io5";
 import "./../scrollbar.css";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { getProductById } from "@/store/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { assetUrl } from "@/shared/_services/api_service";
 
 const ProductDetails = () => {
   const [active, setActive] = useState(false);
+  const productVar = useSelector(state => state.product) 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const audioRef = useRef(null);
+  const location = useLocation();
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(getProductById(id))
+  }, [])
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,7 +56,7 @@ const ProductDetails = () => {
           <p className="lg:text-lg w-[90%] text-center text-md  text-zinc-400 mt-[-10px]">
             Unlock unlimited access to premium audio content
           </p>
-          <Button
+          <Button onClick={() => navigate('/subscription')}
             className={`bg-amber-600 text-white  lg:mt-5 w-full cursor-pointer py-5 hover:bg-black hover:text-white`}
           >
             Subscribe Now
@@ -64,15 +77,15 @@ const ProductDetails = () => {
             {/* ============= Left ============================ */}
             <div className="left w-full lg:w-1/2 flex items-center justify-center lg:h-[70dvh]">
               <div className="content flex items-center justify-center flex-col gap-2 p-3 w-full lg:w-[80%]">
-                <p className="font-[Rubik] uppercase text-center">fiction</p>
+                <p className="font-[Rubik] uppercase text-center">{productVar.singleProductData?.categoryId?.title}</p>
                 <h2 className="font-[Nunito] text-2xl lg:text-4xl uppercase font-semibold text-center">
-                  nocturnal creatures
+                  {productVar.singleProductData.title}
                 </h2>
                 <p className="font-[Rubik] uppercase text-center">
-                  by said sayrafiezadeh
+                  by {productVar.singleProductData.author}
                 </p>
                 <small className="font-semibold font-[Rubik] text-center">
-                  April 27, 2025
+                  {productVar.singleProductData.createdAt}
                 </small>
               </div>
             </div>
@@ -80,7 +93,7 @@ const ProductDetails = () => {
             {/* ============ Right ========================= */}
             <div className="right w-full lg:w-1/2 flex items-center justify-center lg:h-[70dvh]">
               <img
-                src={b3}
+                src={assetUrl+ productVar.singleProductData.image}
                 alt="image"
                 className="rounded-xl shadow-xl w-full lg:w-[70%] h-72 lg:h-96 object-cover"
               />
@@ -93,7 +106,7 @@ const ProductDetails = () => {
                 ref={audioRef}
                 className="w-full bg-black shadow-none"
                 autoPlay
-                src={song}
+                src={assetUrl+productVar.singleProductData.audioFile}
                 onPlay={() => console.log("onPlay")}
                 // showSkipControls
                 showJumpControls
@@ -107,55 +120,7 @@ const ProductDetails = () => {
                 className="leading-7 text-lg md:text-xl font-medium first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-2"
                 style={{ fontFamily: "Cormorant Garamond" }}
               >
-                Iorem ipsum dolor sit amet consectetur adipisicing elit.
-                Cupiditate incidunt soluta, eaque quisquam, omnis porro modi
-                officia nihil reiciendis, voluptates sint! Atque, reprehenderit
-                nobis, dignissimos veritatis officia dolorem fugit ex alias fuga
-                a autem labore. Facilis nisi aut, aspernatur fugiat saepe
-                placeat nostrum fugit aperiam voluptatibus, doloribus blanditiis
-                ratione eligendi aliquid! Vel beatae illum, illo eius,
-                distinctio laborum maiores voluptate adipisci in incidunt nulla
-                saepe quibusdam. Est quidem, pariatur distinctio quaerat
-                reprehenderit error rerum libero voluptate non! Laboriosam rerum
-                quam omnis, veniam nostrum harum laudantium nesciunt et dicta,
-                placeat voluptas esse perspiciatis eius eum suscipit cumque ut
-                veritatis quasi ea nulla provident est quisquam. Porro placeat,
-                quam quaerat obcaecati aspernatur tenetur commodi praesentium
-                aliquam autem? Iusto officia minima, ducimus vitae possimus nam
-                ex molestias perspiciatis quas excepturi inventore voluptatum,
-                enim consectetur, quis architecto iure voluptatem blanditiis
-                nulla. Voluptates hic minima quos nisi placeat! Obcaecati
-                deleniti deserunt minus totam itaque rem, libero optio ex
-                delectus, quas, iste modi ipsam quo! Dolores ipsum tempore
-                beatae eos necessitatibus recusandae sed praesentium, expedita
-                voluptatem iste, quo error! Ad, fugit mollitia voluptatem id
-                pariatur assumenda. Iusto tenetur rem ipsa cumque laborum vel
-                maiores laudantium explicabo non, neque natus quas porro soluta
-                suscipit deleniti culpa quod eveniet. Odit id hic blanditiis
-                iusto in non. Cum omnis ex neque explicabo fuga. Voluptatem
-                neque dolor nulla totam earum illo impedit optio aperiam eum ad
-                similique, nobis asperiores recusandae fugiat nisi in quam
-                perferendis corrupti quibusdam harum minima alias? Provident
-                asperiores tenetur animi, ipsa sapiente optio dolore voluptate
-                qui, velit eligendi ad distinctio totam facere eaque maiores
-                quasi eveniet sint quae in! Asperiores perferendis eos eligendi
-                qui dolore obcaecati vel doloribus modi ipsa ut quo cumque
-                dignissimos earum distinctio repudiandae voluptatem, sunt veniam
-                natus iure porro quae mollitia temporibus ullam. Veniam, non.
-                Perspiciatis commodi deleniti fuga perferendis, cum officia
-                facilis illo vitae rem! Accusantium numquam cupiditate fuga
-                eveniet nam saepe, eligendi incidunt autem veritatis sit!
-                Voluptatum optio, omnis laboriosam quos asperiores vero quae non
-                numquam, cupiditate corporis molestias provident expedita nihil
-                dicta! Sunt illum suscipit rem atque, ullam praesentium quae
-                ipsum fugit dolore nihil! Voluptates commodi similique
-                perspiciatis consequuntur aliquid, natus quo quidem ut totam
-                deleniti blanditiis, tempora porro incidunt nostrum eligendi
-                aspernatur, veniam adipisci voluptas at aperiam ullam ipsa!
-                Error ad, amet ipsum at aut quos accusamus, modi voluptas optio
-                ducimus provident? Ullam molestias mollitia nostrum excepturi
-                illo placeat amet laborum eum. Animi explicabo officiis quas?
-                Ab, dolorum!
+                {productVar.singleProductData.description}
               </p>
             </div>
           </div>

@@ -9,6 +9,7 @@ import Header from "./_components/Header.jsx";
 import { Footer, ScrollTo } from "./_components";
 import { Dialog } from "./components/ui/dialog";
 import { Drawer } from "./components/ui/drawer";
+import Terms from "./Pages/Terms";
 
 const App = () => {
   return (
@@ -27,7 +28,8 @@ const App = () => {
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/about" element={<About />} />
               <Route path="/privacy-policy" element={<Privacy />} />
-              <Route path="/plans" element={<Plans />} />
+              <Route path="/terms&conditions" element={<Terms />} />
+              <Route path="/subscription" element={<Plans />} />
               <Route path="/payment-successful" element={<PaymentSuccess />} />
               <Route path="/payment-failed" element={<PaymentFailed />} />
               <Route path="*" element={<Error />} />

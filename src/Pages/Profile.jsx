@@ -38,42 +38,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/features/Auth/authSlice";
 import { fetchProfile, updateUser } from "@/features/User/userSlice";
 import { useNavigate } from "react-router-dom";
+import MyProfile from "@/_components/MyProfile";
 
 const Profile = () => {
   const dispatch = useDispatch()
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-    reset,
-  } = useForm();
-  // const [profile, setProfile] = useState(null);
+  const { register, handleSubmit, watch, formState: { errors }, reset, } = useForm();
   const [step, setStep] = useState(1);
-  // const password = watch("password");
-  
-  const { user, isLoading } = useSelector((state) => state.LogProfile)
+  const orderVar = useSelector((state) => state.order);
+  const profileVar = useSelector((state) => state.LogProfile);
+
+
+
   const navigate = useNavigate()
-  const handleLogout = () =>{
+  const handleLogout = () => {
     dispatch(logout())
     navigate('/')
   }
 
   useEffect(() => {
-    dispatch(fetchProfile());    
+    dispatch(fetchProfile());
   }, [dispatch]);
 
-   const handleUpdate = (data) => {
+  const handleUpdate = (data) => {
     dispatch(
       updateUser({ name: data.name, email: data.email, number: data.number })
     );
   };
-
-  // useEffect(() => {
-  //   if (user && step === 1) {
-  //     reset({ name: user.name, email: user.email, number: user.phoneNumber });
-  //   }
-  // }, [user, step]);
 
 
   return (
@@ -109,14 +99,12 @@ const Profile = () => {
                     <div className="tabs flex flex-col gap-4 items-start w-full">
                       <div
                         onClick={() => setStep(1)}
-                        className={`tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-orange-50 w-3/4 px-2 py-2 transition-all duration-300 ease ${
-                          step === 1 ? "bg-orange-50 text-amber-600" : ""
-                        }`}
+                        className={`tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-orange-50 w-3/4 px-2 py-2 transition-all duration-300 ease ${step === 1 ? "bg-orange-50 text-amber-600" : ""
+                          }`}
                       >
                         <div
-                          className={`icon p-2 border rounded-sm ${
-                            step === 1 ? "border-orange-300" : ""
-                          } `}
+                          className={`icon p-2 border rounded-sm ${step === 1 ? "border-orange-300" : ""
+                            } `}
                         >
                           <UserCog2 />
                         </div>
@@ -124,21 +112,18 @@ const Profile = () => {
                       </div>
                       <div
                         onClick={() => setStep(2)}
-                        className={`tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-orange-50 w-3/4 px-2 py-2 transition-all duration-300 ease ${
-                          step === 2 ? "bg-orange-50 text-amber-600" : ""
-                        }`}
+                        className={`tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-orange-50 w-3/4 px-2 py-2 transition-all duration-300 ease ${step === 2 ? "bg-orange-50 text-amber-600" : ""
+                          }`}
                       >
                         <div
-                          className={`icon p-2 border rounded-sm ${
-                            step === 2 ? "border-orange-300" : ""
-                          } `}
+                          className={`icon p-2 border rounded-sm ${step === 2 ? "border-orange-300" : ""
+                            } `}
                         >
                           <BookAudio />
                         </div>
                         <p>My Subscriptions</p>
                       </div>
                       <div
-                        // onClick={handleLogout}
                         className="tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-orange-50 w-3/4 px-2 py-2 transition-all duration-300 ease"
                       >
                         <AlertDialogTrigger className='flex items-center gap-4 cursor-pointer w-full' >
@@ -153,156 +138,31 @@ const Profile = () => {
                   {step === 1 && (
                     <div className="lg:w-2/3 w-full">
                       <p className="text-lg font-semibold mb-3">Edit Profile</p>
-                      <form
-                        className="box w-full"
-                        onSubmit={handleSubmit((data) => console.log(data))}
-                      >
-                        <div className="right w-full lg:w-full flex gap-5 items-center lg:items-start flex-col-reverse lg:flex-row">
-                          <div className="left w-full lg:w-2/3 flex flex-col items-start gap-4">
-                            <div className="box flex flex-col gap-2 w-full">
-                              <label htmlFor="name">Full Name</label>
-                              <Input
-                                type="text"
-                                {...register("name", {
-                                  pattern: {
-                                    value: /^[a-zA-Z\s]+$/,
-                                    message: "Please enter a valid name.",
-                                  },
-                                })}
-                              />
-                              {errors.name && (
-                                <small className="text-red-600">
-                                  {errors.name.message}
-                                </small>
-                              )}
-                            </div>
-                            <div className="box flex flex-col gap-2 w-full">
-                              <label htmlFor="number">Mobile Number</label>
-                              <Input
-                                type="number"
-                                {...register("number", {
-                                  pattern: {
-                                    value: /^[a-zA-Z\s]+$/,
-                                    message: "Please enter a mobile number.",
-                                  },
-                                })}
-                              />
-                              {errors.name && (
-                                <small className="text-red-600">
-                                  {errors.name.message}
-                                </small>
-                              )}
-                            </div>
-                            <div className="box flex flex-col gap-2 w-full">
-                              <label htmlFor="email">Email</label>
-                              <Input
-                                type="text"
-                                {...register("email", {
-                                  pattern: {
-                                    value:
-                                      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                                    message:
-                                      "Please enter a valid email address.",
-                                  },
-                                })}
-                              />
-                              {errors.email && (
-                                <small className="text-red-600">
-                                  {errors.email.message}
-                                </small>
-                              )}
-                            </div>
-                            <Button className="self-center bg-amber-600 cursor-pointer text-white hover:bg-black mt-5">
-                              Save Changes
-                            </Button>
-                          </div>
-                          <div className="right w-1/3 flex flex-col items-center gap-3">
-                            <img
-                            src={avatar}
-                              className="md:w-32 md:h-32 w-28 h-28 rounded-md"
-                              alt="avatar_icon"
-                            />
-                            <Button
-                              variant="outline"
-                              className="cursor-pointer border-orange-300 border"
-                            >
-                              <LucideCamera />
-                              Change Avatar
-                            </Button>
-                          </div>
-                        </div>
-                      </form>
+                      <MyProfile props={profileVar.user}/>
                     </div>
                   )}
 
                   {step === 2 && (
                     <div className="right w-2/3 flex gap-4 items-start flex-col">
-                      {/* <p className="font-semibold">Change Password</p>
-                      <form
-                        className="w-full flex flex-col gap-6"
-                      >
-                        <div className="box w-full flex flex-col gap-2">
-                          <label htmlFor="password">New Password</label>
-                          <Input
-                            type="text"
-                            placeholder="Type here new password"
-                            {...register("password", {
-                              required: "Please enter a valid password",
-                              minLength: {
-                                value: 8,
-                                message:
-                                  "Password should be at least 8 characters",
-                              },
-                            })}
-                            className="w-full"
-                          />
-                          {errors.password && (
-                            <small className="text-red-600">
-                              {errors.password.message}
-                            </small>
-                          )}
-                        </div>
 
-                        <div className="box w-full flex flex-col gap-2">
-                          <label htmlFor="confirmPassword">
-                            Confirm Password
-                          </label>
-                          <Input
-                            type="text"
-                            placeholder="Type here to confirm password"
-                            {...register("confirmPassword", {
-                              required: "Please confirm your password",
-                              validate: (value) =>
-                                value === password || "Passwords do not match",
-                            })}
-                            className="w-full"
-                          />
-                          {errors.confirmPassword && (
-                            <small className="text-red-600">
-                              {errors.confirmPassword.message}
-                            </small>
-                          )}
-                        </div>
-
-                        <Button className="bg-amber-600 text-white w-fit self-center cursor-pointer hover:bg-black">
-                          Change Password
-                        </Button>
-                      </form> */}
-                      
                       <p>All Subscriptions</p>
-                      <div className="boxes Subscriptions_boxes w-full h-77 overflow-y-auto flex flex-col gap-5 p-1">
-                        <div className="box relative border border-zinc-300 shadow rounded-lg flex items-center gap-4">
-                          <div className="left w-1/5">
-                            <img src={b3} alt="" className="w-full block h-[120px] object-cover rounded-lg shadow-xl"/>
+                      {orderVar.orderHistory &&
+                        <div className="boxes Subscriptions_boxes w-full h-77 overflow-y-auto flex flex-col gap-5 p-1">
+                          <div className="box relative border border-zinc-300 shadow rounded-lg flex items-center gap-4">
+                            {/* <div className="left w-1/5"> */}
+                            {/* <img src={b3} alt="" className="w-full block h-[120px] object-cover rounded-lg shadow-xl" /> */}
+                            {/* </div> */}
+                            <div className="right w-4/5">
+                              <p className="font-[Nunito] font-semibold text-xl">{orderVar.orderHistory.subscriptionId.title}</p>
+                              <p className="font-[Rubik] text-md text-zinc-500">Transaction Id: <span className="">{orderVar.orderHistory.paymentIntentId}</span></p>
+                              <p className="text-sm text-amber-600">Price : <span>{orderVar.orderHistory.subscriptionId.price}</span></p>
+                            </div>
+                            <div className="badge absolute text-xs top-2 text-zinc-400 right-3">{orderVar.orderHistory.subscriptionId.createdAt}</div>
                           </div>
-                          <div className="right w-4/5">
-                            <p className="font-[Nunito] font-semibold text-xl">Lorem ipsum dolor sit amet.</p>
-                            <p className="font-[Rubik] text-md text-zinc-500">Genre: <span className="uppercase">FICTION</span></p>
-                            <p className="text-sm text-amber-600">Price : <span>780.00</span></p>
-                          </div>
-                          <div className="badge absolute text-xs top-2 text-zinc-400 right-3">27 April, 2025</div>
                         </div>
-                      </div>
+
+                      }
+
                     </div>
                   )}
                 </div>
@@ -316,14 +176,12 @@ const Profile = () => {
                   <div className="tabs flex flex-col gap-4 items-start w-full">
                     <div
                       onClick={() => setStep(1)}
-                      className={`tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease ${
-                        step === 1 ? "bg-blue-50 text-blue-400" : ""
-                      }`}
+                      className={`tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease ${step === 1 ? "bg-blue-50 text-blue-400" : ""
+                        }`}
                     >
                       <div
-                        className={`icon p-2 border rounded-sm ${
-                          step === 1 ? "border-blue-200" : ""
-                        }`}
+                        className={`icon p-2 border rounded-sm ${step === 1 ? "border-blue-200" : ""
+                          }`}
                       >
                         <UserCog2 />
                       </div>
@@ -331,14 +189,12 @@ const Profile = () => {
                     </div>
                     <div
                       onClick={() => setStep(2)}
-                      className={`tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease ${
-                        step === 2 ? "bg-blue-50 text-blue-400" : ""
-                      }`}
+                      className={`tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease ${step === 2 ? "bg-blue-50 text-blue-400" : ""
+                        }`}
                     >
                       <div
-                        className={`icon p-2 border rounded-sm ${
-                          step === 2 ? "border-blue-200" : ""
-                        } `}
+                        className={`icon p-2 border rounded-sm ${step === 2 ? "border-blue-200" : ""
+                          } `}
                       >
                         <LockIcon />
                       </div>

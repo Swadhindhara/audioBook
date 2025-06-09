@@ -11,8 +11,8 @@ import userReducer from '../features/User/userSlice'
 import bannerReducer from './bannerSlice';
 import pageReducer from './pagesSlice'
 import productReducer from './productSlice';
-
-
+import subscriptionReducer from './subscriptionSlice'
+import orderReducer from './orderSlice'
 const store = configureStore({
     reducer: {
         categories: categoryReducer,
@@ -28,6 +28,8 @@ const store = configureStore({
         banner: bannerReducer,
         page: pageReducer,
         product: productReducer,
+        subscription: subscriptionReducer,
+        order: orderReducer,
 
     }
 })
