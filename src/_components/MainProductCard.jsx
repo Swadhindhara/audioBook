@@ -17,7 +17,7 @@ const MainProductCard = ({product}) => {
             <div className="bottom flex flex-col gap-2">
                 <p className='font-[Nunito] text-md font-semibold'>{product?.title}</p>
                 <div className="box flex items-center justify-between">
-                  <p className='text-amber-600 font-[Nunito] text-sm md:text-md'>₹ <span className='font-[Nunito]'>{product?.price}.00</span></p>
+                  {/* <p className='text-amber-600 font-[Nunito] text-sm md:text-md'>₹ <span className='font-[Nunito]'>{product?.price}.00</span></p> */}
                   <Headphones className='w-4 lg:w-5 text-amber-600'/>
                 </div>
             </div>
