@@ -8,6 +8,8 @@ import Wishlist from "./Wishlist";
 import About from "./About";
 import Privacy from "./Privacy";
 import Plans from "./Plans";
+import PaymentSuccess from "./PaymentSuccess";
+import PaymentFailed from "./PaymentFailed";
 
 export {
     Home,
@@ -20,4 +22,6 @@ export {
     About,
     Privacy,
     Plans,
+    PaymentSuccess,
+    PaymentFailed
 }
