@@ -9,7 +9,7 @@ import { CategoryBox, ProductCard } from "@/_components";
 import b5 from "../assets/images/b5.jpg";
 import b6 from "../assets/images/b6.jpg";
 import b3 from "../assets/images/b3.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getbanner } from "@/store/bannerSlice";
 import { assetUrl } from "@/shared/_services/api_service";
@@ -24,6 +24,7 @@ import {
 const Home = () => {
   const [step, setStep] = useState(1);
   const [active, setActive] = useState(0);
+  const navigate = useNavigate();
   const tabs = [
     {
       name: "top rating",
@@ -89,7 +90,7 @@ const Home = () => {
                     <h2 className="lg:text-5xl text-2xl text-white lg:w-2/3 text-center font-[Nunito] font-bold leading-8 lg:leading-14">
                       {item.description}{" "}
                     </h2>
-                    <Button
+                    <Button onClick={() => navigate("/products")}
                       className={`font-[Nunito] bg-white text-black hover:bg-amber-600 hover:text-white cursor-pointer`}
                     >
                       Shop Now
@@ -202,7 +203,7 @@ const Home = () => {
                     ))}
               </div>
             )}
-            <Button
+            <Button onClick={()=> navigate('/products')}
               className={`bg-amber-600 text-white hover:bg-black hover:text-white cursor-pointer py-4 px-8 self-center`}
             >
               All Products

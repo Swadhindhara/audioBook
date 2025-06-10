@@ -35,10 +35,11 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/features/Auth/authSlice";
+// import { logout } from "@/features/Auth/authSlice";
 import { fetchProfile, updateUser } from "@/features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import MyProfile from "@/_components/MyProfile";
+import { logOut } from "@/store/authSlice";
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -51,7 +52,7 @@ const Profile = () => {
 
   const navigate = useNavigate()
   const handleLogout = () => {
-    dispatch(logout())
+    dispatch(logOut())
     navigate('/')
   }
 

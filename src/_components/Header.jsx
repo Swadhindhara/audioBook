@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "./../assets/images/logo.svg";
 import { Heart, ShoppingBag, User } from "lucide-react";
 import avatar from "../assets/graphics/avatar.svg";
 import search from "../assets/graphics/search.png";
+import ham from "../assets/graphics/ham.png";
+import cross from "../assets/graphics/cross.png";
 import {
   DialogContent,
   DialogDescription,
@@ -18,11 +20,14 @@ import { loginProfile } from "@/features/Auth/authSlice";
 import { fetchProfile } from "@/features/User/userSlice";
 import { localService } from "@/shared/_session/local";
 import { myActiveSubs, myOrders } from "@/store/orderSlice";
+import { loginUser } from "@/store/authSlice";
 
 const Header = () => {
   const location = useLocation();
   const dispatch = useDispatch()
-  const { user } = useSelector((state) => state.user)
+  // const { user, isSuccess } = useSelector((state) => state.user)
+  const authVar = useSelector((state) => state.auth);
+
   const orderVar = useSelector((state) => state.order);
 
 
@@ -62,7 +67,7 @@ const Header = () => {
 
         const profile = await res.json();
 
-        dispatch(loginProfile({
+        dispatch(loginUser({
           name: profile?.name,
           email: profile?.email,
           profileImage: profile?.picture
@@ -76,6 +81,15 @@ const Header = () => {
     onError: (error) => console.error("Login Failed:", error),
     scope: "openid profile email",
   });
+  const [active, setActive] = useState(false);
+
+  const handleToggle = () => {
+    if (active === false) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  };
 
   return (
     <>
@@ -88,7 +102,9 @@ const Header = () => {
       >
         <div className="container m-auto">
           <div className="header flex items-center justify-between">
-            <div className="left lg:w-1/3 fixed lg:static right-0 top-0 w-2/3 h-full bg-black lg:bg-transparent lg:z-0 z-30 lg:translate-0 translate-x-[100%]">
+            <div className={`left lg:w-1/3 fixed lg:static right-0 top-0 w-2/3 h-full bg-black lg:bg-transparent lg:z-0 z-30 lg:translate-x-0 transition-all duration-300 ease ${active ? "translate-x-0" : "translate-x-[100%]"}`}>
+            <img src={cross} alt="" className="w-10 block lg:hidden absolute left-6 top-2 cursor-pointer" onClick={handleToggle}/>
+
               <ul className="flex lg:items-center items-start gap-5 flex-col lg:flex-row px-8 py-12 lg:p-0">
                 {menu.map((item, index) => (
                   <li key={index}>
@@ -105,7 +121,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="right flex items-center justify-end gap-5 w-1/3">
-              {localStorage.getItem("token") ? (
+              {authVar.isAuthenticated ? (
                 <Link to={"/profile"}>
                   <img
                     src={avatar}
@@ -129,6 +145,12 @@ const Header = () => {
                   0
                 </div>
               </Link> */}
+              <img
+                src={ham}
+                alt=""
+                onClick={handleToggle}
+                className="cursor-pointer block lg:hidden w-8"
+              />
             </div>
           </div>
         </div>

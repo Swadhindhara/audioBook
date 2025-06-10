@@ -24,13 +24,14 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories } from "@/features/Categories/categorySlice";
 import { getAllproduct, getAlltProductData } from "@/store/productSlice";
+import { getCategory } from "@/store/categorySlice";
 
 const Products = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state.categories);
+  const  categories  = useSelector((state) => state.category);
+  
   const productVar = useSelector((state) => state.product);
 
   const [formData, setFormData] = useState({
@@ -48,7 +49,7 @@ const Products = () => {
 
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(getCategory());
     dispatch(getAllproduct(formData.limit, formData.offset, formData.categoryId, formData.minPrice, formData.maxPrice, formData.minAge, formData.maxAge,));
   }, [dispatch]);
 
@@ -93,7 +94,7 @@ const Products = () => {
               <div className="box flex flex-col gap-3">
                 <p className="font-bold font-[Nunito]">Categories</p>
                 <div className="categories flex items-center flex-wrap gap-2 w-full">
-                  {categories.map((item, index) => (
+                  {categories.categoryData.map((item, index) => (
                     <div
                       className={` ${activeCategory === index
                         ? "bg-orange-200 text-amber-600 border border-amber-600"
@@ -159,7 +160,7 @@ const Products = () => {
                   <div className="box flex flex-col gap-3 text-black">
                     <p className="font-bold font-[Nunito]">Categories</p>
                     <div className="categories flex items-center flex-wrap gap-2 w-full">
-                      {categories.map((item, index) => (
+                      {categories.categoryData.map((item, index) => (
                         <div
                           className={` ${activeCategory === index
                             ? "bg-orange-200 text-amber-600 border border-amber-600"

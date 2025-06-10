@@ -11,8 +11,8 @@ const MainProductCard = ({product}) => {
   return (
     <>
         <Link to ={'/product/'+product._id} className="card w-full flex flex-col gap-3 hover:scale-103 duration-300 cursor-pointer">
-            <div className="top rounded-2xl shadow-md">
-                <img src={assetUrl +product?.image} alt="" className=' rounded-2xl'/>
+            <div className="top rounded-2xl shadow-md ">
+                <img src={assetUrl +product?.image} alt="" className=' rounded-2xl lg:h-56  h-40 w-full object-cover'/>
             </div>
             <div className="bottom flex flex-col gap-2">
                 <p className='font-[Nunito] text-md font-semibold'>{product?.title}</p>

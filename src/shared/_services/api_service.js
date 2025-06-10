@@ -7,7 +7,7 @@ const rootUrl = 'http://localhost:5111/api/v1/'
 export const assetUrl = 'http://localhost:5111/'
 
 
-const authURL = rootUrl + 'admin';
+const authURL = rootUrl + 'user';
 const categoryURL = rootUrl + 'category';
 const bannerURL = rootUrl + 'banners';
 const pagesURL = rootUrl + "pages";
@@ -93,8 +93,17 @@ async function myActiveSubs() {
     headers: await authHeader(),
   });
 }
+async function loginUser(data) {
+  return await axios.post(authURL + '/login',data, {
+    headers: await authHeader(),
+  });
+}
 
-
+async function getCategory() {
+  return await axios.get(categoryURL + '/', {
+    headers: await authHeader(),
+  });
+}
 
 
 
@@ -108,6 +117,11 @@ export const service = {
   getsubscription,
 
   generateOrder, confirmOrder, myOrders, myActiveSubs,
+
+  loginUser,
+
+  getCategory,
+
 
 
 }
