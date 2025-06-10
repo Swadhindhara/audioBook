@@ -4,7 +4,8 @@ import { setLoading } from './loader';
 
 const initialState = {
   orderData: [],
-  orderHistory: ''
+  orderHistory: '',
+  subsHistory:''
 }
 
 export const orderSlice = createSlice({
@@ -17,10 +18,13 @@ export const orderSlice = createSlice({
     setorderHistoeyData(state, { payload }) {
       state.orderHistory = payload
     },
+    setSubsHistoeyData(state, { payload }) {
+      state.subsHistory = payload
+    },
   }
 })
 
-export const { setorderData, setorderHistoeyData } = orderSlice.actions;
+export const { setorderData, setorderHistoeyData, setSubsHistoeyData } = orderSlice.actions;
 
 export default orderSlice.reducer;
 
@@ -68,6 +72,24 @@ export function myOrders() {
         (response) => {          
           dispatch(setLoading(false))
           dispatch(setorderHistoeyData(response.data))
+        }, (error) => {
+          dispatch(setLoading(false))
+          errorHandler(error.response)
+        }
+      );
+    } catch (err) {
+
+    }
+  }
+}
+export function myActiveSubs() {
+  return async function myActiveSubsThunk(dispatch) {
+    dispatch(setLoading(true))
+    try {
+      await service.myActiveSubs().then(
+        (response) => {          
+          dispatch(setLoading(false))
+          dispatch(setSubsHistoeyData(response.data))
         }, (error) => {
           dispatch(setLoading(false))
           errorHandler(error.response)

@@ -34,7 +34,7 @@ const Products = () => {
   const productVar = useSelector((state) => state.product);
 
   const [formData, setFormData] = useState({
-    limit: 9,
+    limit: 90 ,
     offset: 0,
     categoryId: '',
     minPrice: '',
@@ -108,7 +108,7 @@ const Products = () => {
                 </div>
               </div>
 
-              <div className="box flex flex-col gap-3 w-full">
+              {/* <div className="box flex flex-col gap-3 w-full">
                 <p className="font-bold font-[Nunito]">Price Range</p>
                 <Slider
                   range
@@ -129,9 +129,9 @@ const Products = () => {
                   <small className="font-semibold font-[Nunito]">0</small>
                   <small className="font-semibold font-[Nunito]">1000</small>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="box flex flex-col gap-3 w-full">
+              {/* <div className="box flex flex-col gap-3 w-full">
                 <p className="font-bold font-[Nunito]">Age Range</p>
                 <Slider
                   range
@@ -148,7 +148,7 @@ const Products = () => {
                   <small className="font-semibold font-[Nunito]">0</small>
                   <small className="font-semibold font-[Nunito]">18+</small>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* ================ For mobile and  tab ========================= */}
@@ -224,7 +224,7 @@ const Products = () => {
                 <MainProductCard key={index} product={product} />
               ))}
             </div>
-            <Pagination>
+            {/* <Pagination>
               <PaginationContent>
                 <PaginationItem>
                   <PaginationPrevious href="#" />
@@ -247,7 +247,7 @@ const Products = () => {
                   <PaginationNext href="#" />
                 </PaginationItem>
               </PaginationContent>
-            </Pagination>
+            </Pagination> */}
           </div>
         </div>
       </div>

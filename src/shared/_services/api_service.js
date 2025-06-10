@@ -88,6 +88,11 @@ async function myOrders() {
     headers: await authHeader(),
   });
 }
+async function myActiveSubs() {
+  return await axios.get(orderURL + '/myActiveSubscription', {
+    headers: await authHeader(),
+  });
+}
 
 
 
@@ -102,7 +107,7 @@ export const service = {
 
   getsubscription,
 
-  generateOrder, confirmOrder, myOrders,
+  generateOrder, confirmOrder, myOrders, myActiveSubs,
 
 
 }

@@ -23,9 +23,7 @@ const MyProfile = () => {
     email: "",
     phoneNumber: "",
   });
-  const handleUpdate = (data) => {
-    console.log(data);
-    
+  const handleUpdate = (data) => {    
     dispatch(
       updateUser({ name: data.name, email: data.email, phoneNumber: data.number })
     );

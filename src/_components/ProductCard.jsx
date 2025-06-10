@@ -17,7 +17,7 @@ import { assetUrl } from '@/shared/_services/api_service'
                 <div className="details flex items-center justify-center flex-col gap-1">
                     <p className='font-[Nunito] font-bold text-lg md:text-xl'>{item.title}</p>
                     <div className="price flex items-center gap-4">
-                        <span className='text-amber-600'>₹{item.price}</span>
+                        <span className='text-amber-600'>By{' '}{item.author}</span>
                         {/* <strike>₹ 80.00</strike> */}
                     </div>
                 </div>

@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginProfile } from "@/features/Auth/authSlice";
 import { fetchProfile } from "@/features/User/userSlice";
 import { localService } from "@/shared/_session/local";
-import { myOrders } from "@/store/orderSlice";
+import { myActiveSubs, myOrders } from "@/store/orderSlice";
 
 const Header = () => {
   const location = useLocation();
@@ -29,13 +29,15 @@ const Header = () => {
   const handleLogin = () => {
   };
 
+  const token = localService.get('token');
   useEffect(() => {
-    const token = localService.get('token');
     if (token) {
       dispatch(myOrders())
+      dispatch(myActiveSubs())
     }
 
-  }, [])
+
+  }, [token])
 
 
   const menu = [
