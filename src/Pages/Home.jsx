@@ -178,7 +178,9 @@ const Home = () => {
             {step === 1 && (
               <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
                 {productVar.topRatingProductData &&
-                  productVar.topRatingProductData.map((item, index) => (
+                  productVar.topRatingProductData
+                  .slice(0,6)
+                  .map((item, index) => (
                     <ProductCard item={item} key={index} />
                   ))}
               </div>
@@ -187,7 +189,7 @@ const Home = () => {
               <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
                 {productVar.topSellerProductData &&
                   productVar.topSellerProductData
-                    .slice(0, 5)
+                    .slice(0, 6)
                     .map((item, index) => (
                       <ProductCard item={item} key={index} />
                     ))}
@@ -197,7 +199,7 @@ const Home = () => {
               <div className="boxes grid gap-4 md:gap-5 lg:gap-6 grid-cols-2 lg:grid-cols-3 w-full">
                 {productVar.latestProductData &&
                   productVar.latestProductData
-                    .slice(0, 4)
+                    .slice(0, 6)
                     .map((item, index) => (
                       <ProductCard item={item} key={index} />
                     ))}

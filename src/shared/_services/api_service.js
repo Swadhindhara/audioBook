@@ -13,6 +13,7 @@ const bannerURL = rootUrl + 'banners';
 const pagesURL = rootUrl + "pages";
 const productURL = rootUrl + "product";
 const subscriptionURL = rootUrl + "subscription";
+const newsLetterURL = rootUrl + "newsLetter";
 const orderURL = rootUrl + "order";
 
 
@@ -70,6 +71,9 @@ async function getProductById(id) {
 async function getsubscription() {
   return await axios.get(subscriptionURL)
 }
+async function addNewsLetter(email) {
+  return await axios.post(newsLetterURL,{email})
+}
 
 
 /****Subscrip */
@@ -114,7 +118,8 @@ export const service = {
 
   getTrendingproduct, getFeaturedproduct, getTopRatingPoduct, getTopSellerproduct, getLatestproduct, getAllproduct, getProductById,
 
-  getsubscription,
+  getsubscription, addNewsLetter,
+
 
   generateOrder, confirmOrder, myOrders, myActiveSubs,
 

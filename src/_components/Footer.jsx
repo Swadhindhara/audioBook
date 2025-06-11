@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../assets/images/logo.svg'
 import { Input } from '@/components/ui/input'
@@ -7,66 +7,79 @@ import { MdOutlineMail } from "react-icons/md";
 import { FaFacebookF } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaLinkedinIn } from "react-icons/fa";
+import { useDispatch } from 'react-redux'
+import { addNewsLetter } from '@/store/subscriptionSlice'
 
 const Footer = () => {
-  return (
-    <>
-        <section className='footer_container bg-zinc-200 px-[4%]'>
-            <div className="container mx-auto">
-                <div className="footer py-10 flex items-start flex-col lg:flex-row gap-6">
-                    <div className="left lg:w-1/3 w-full flex flex-col gap-6">
-                        <Link><img src={logo} alt="" className='lg:w-52 md:w-54 w-40'/></Link>
-                        <p className='font-[Rubik] leading-7 text-zinc-600 lg:w-[80%]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quidem quasi, tempore quis blanditiis adipisci voluptatum tenetur ratione doloremque nisi nihil perferendis, tempora iste, consectetur esse earum modi autem quae!</p>
-                    </div>
-                    <div className="middle w-full lg:w-1/3 flex flex-col gap-5 justify-center">
-                        <p className='font-semibold text-xl font-[Rubik]'>Quick Links</p>
-                        <ul className='flex flex-col gap-4 items-start'>
-                            <li><Link to={'/'}>Home</Link></li>
-                            <li><Link to={'/about'}>About us</Link></li>
-                            <li><Link to={'/contact'}>Contact us</Link></li>
-                            <li><Link to={'/products'}>Products</Link></li>
-                        </ul>
-                    </div>
-                    <div className="right w-full lg:w-1/3 flex flex-col gap-2">
-                        <p className='font-semibold text-xl font-[Rubik]'>NEWSLETTERS</p>
 
-                        <div className="box flex flex-col gap-4">
-                            <p className='text-zinc-600'>Join 40+ Subscribers and get a new discount coupon.</p>
-                            <div className="input_div flex items-center">
-                                <Input placeholder='Your email address...' className={`border border-black border-r-0 outline-none rounded-sm rounded-r-none`}/>
-                                <Button className={`bg-black text-white rounded-l-none cursor-pointer hover:bg-amber-600`}><MdOutlineMail /></Button>
-                            </div>
-                            <div className="icons flex items-center gap-4">
-                                <a href='#' className="icon w-10 h-10 border border-zinc-400 rounded-4xl flex items-center justify-center hover:translate-y-[-5px] duration-300">
-                                    <FaFacebookF className='text-xl'/>
-                                </a>
-                                <a href='#' className="icon w-10 h-10 border border-zinc-400 rounded-4xl flex items-center justify-center hover:translate-y-[-5px] duration-300">
-                                    <RiInstagramFill className='text-xl'/>
-                                </a>
-                                <a href='#' className="icon w-10 h-10 border border-zinc-400 rounded-4xl flex items-center justify-center hover:translate-y-[-5px] duration-300">
-                                    <FaLinkedinIn  className='text-xl'/>
-                                </a>
+    const [email, setEmail] = useState('')
+    const dispatch = useDispatch();
+
+    const handleSubmit = () => {
+        dispatch(addNewsLetter(email))
+        setEmail('');
+    }
+    return (
+        <>
+            <section className='footer_container bg-zinc-200 px-[4%]'>
+                <div className="container mx-auto">
+                    <div className="footer py-10 flex items-start flex-col lg:flex-row gap-6">
+                        <div className="left lg:w-1/3 w-full flex flex-col gap-6">
+                            <Link><img src={logo} alt="" className='lg:w-52 md:w-54 w-40' /></Link>
+                            <p className='font-[Rubik] leading-7 text-zinc-600 lg:w-[80%]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quidem quasi, tempore quis blanditiis adipisci voluptatum tenetur ratione doloremque nisi nihil perferendis, tempora iste, consectetur esse earum modi autem quae!</p>
+                        </div>
+                        <div className="middle w-full lg:w-1/3 flex flex-col gap-5 justify-center">
+                            <p className='font-semibold text-xl font-[Rubik]'>Quick Links</p>
+                            <ul className='flex flex-col gap-4 items-start'>
+                                <li><Link to={'/'}>Home</Link></li>
+                                <li><Link to={'/about'}>About us</Link></li>
+                                <li><Link to={'/contact'}>Contact us</Link></li>
+                                <li><Link to={'/products'}>Products</Link></li>
+                            </ul>
+                        </div>
+                        <div className="right w-full lg:w-1/3 flex flex-col gap-2">
+                            <p className='font-semibold text-xl font-[Rubik]'>NEWSLETTERS</p>
+
+                            <div className="box flex flex-col gap-4">
+                                <p className='text-zinc-600'>Join 40+ Subscribers and get a new discount coupon.</p>
+                                <div className="input_div flex items-center">
+                                    <Input placeholder='Your email address...' className={`border border-black border-r-0 outline-none rounded-sm rounded-r-none`}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={email}
+                                    />
+                                    <Button className={`bg-black text-white rounded-l-none cursor-pointer hover:bg-amber-600`} onClick={()=> handleSubmit()}><MdOutlineMail /></Button>
+                                </div>
+                                <div className="icons flex items-center gap-4">
+                                    <a href='#' className="icon w-10 h-10 border border-zinc-400 rounded-4xl flex items-center justify-center hover:translate-y-[-5px] duration-300">
+                                        <FaFacebookF className='text-xl' />
+                                    </a>
+                                    <a href='#' className="icon w-10 h-10 border border-zinc-400 rounded-4xl flex items-center justify-center hover:translate-y-[-5px] duration-300">
+                                        <RiInstagramFill className='text-xl' />
+                                    </a>
+                                    <a href='#' className="icon w-10 h-10 border border-zinc-400 rounded-4xl flex items-center justify-center hover:translate-y-[-5px] duration-300">
+                                        <FaLinkedinIn className='text-xl' />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section className='py-5 bg-black px-[4%]'>
-            <div className="container mx-auto">
-                <div className="copy flex items-center justify-between flex-col gap-3 md:gap-0 md:flex-row">
-                    <div className="left">
-                        <p className='text-white font-[Rubik]'>&copy; All Rights Reserved.</p>
-                    </div>
-                    <div className="right flex items-center gap-5">
-                        <Link to={'/terms&conditions'} className='text-white font-[Rubik]'>Terms & Condition</Link>
-                        <Link to={'/privacy-policy'} className='text-white font-[Rubik]'>Privacy Policy</Link>
+            </section>
+            <section className='py-5 bg-black px-[4%]'>
+                <div className="container mx-auto">
+                    <div className="copy flex items-center justify-between flex-col gap-3 md:gap-0 md:flex-row">
+                        <div className="left">
+                            <p className='text-white font-[Rubik]'>&copy; All Rights Reserved.</p>
+                        </div>
+                        <div className="right flex items-center gap-5">
+                            <Link to={'/terms&conditions'} className='text-white font-[Rubik]'>Terms & Condition</Link>
+                            <Link to={'/privacy-policy'} className='text-white font-[Rubik]'>Privacy Policy</Link>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </>
-  )
+            </section>
+        </>
+    )
 }
 
 export default Footer

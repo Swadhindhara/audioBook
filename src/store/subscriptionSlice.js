@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { service } from '../shared/_services/api_service'
 import { setLoading } from './loader';
+import { toast } from "sonner";
 
 const initialState = {
   subscriptionData: [],
@@ -25,9 +26,28 @@ export function getsubscription() {
     dispatch(setLoading(true))
     try {
       await service.getsubscription().then(
-        (response) => {          
+        (response) => {
           dispatch(setLoading(false))
           dispatch(setsubscriptionData(response.data))
+        }, (error) => {
+          dispatch(setLoading(false))
+          errorHandler(error.response)
+        }
+      );
+    } catch (err) {
+
+    }
+  }
+}
+export function addNewsLetter(email) {
+  return async function addNewsLetterThunk(dispatch) {
+    dispatch(setLoading(true))
+    try {
+      await service.addNewsLetter(email).then(
+        (response) => {
+          dispatch(setLoading(false))
+          toast.success("Added Successfully!!!");
+
         }, (error) => {
           dispatch(setLoading(false))
           errorHandler(error.response)
