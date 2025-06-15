@@ -3,6 +3,8 @@ import { authHeader } from "../_helper/auth-header";
 
 
 
+// const rootUrl = 'http://159.223.99.195:5111/api/v1/'
+// export const assetUrl = 'http://159.223.99.195:5111/'
 const rootUrl = 'http://localhost:5111/api/v1/'
 export const assetUrl = 'http://localhost:5111/'
 

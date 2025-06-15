@@ -40,7 +40,7 @@ import { fetchProfile, updateUser } from "@/features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import MyProfile from "@/_components/MyProfile";
 import { logOut } from "@/store/authSlice";
-
+import moment from 'moment/moment'
 const Profile = () => {
   const dispatch = useDispatch()
   const { register, handleSubmit, watch, formState: { errors }, reset, } = useForm();
@@ -139,7 +139,7 @@ const Profile = () => {
                   {step === 1 && (
                     <div className="lg:w-2/3 w-full">
                       <p className="text-lg font-semibold mb-3">Edit Profile</p>
-                      <MyProfile user={profileVar.user}/>
+                      <MyProfile user={profileVar.user} />
                     </div>
                   )}
 
@@ -158,7 +158,8 @@ const Profile = () => {
                               <p className="font-[Rubik] text-md text-zinc-500">Transaction Id: <span className="">{orderVar.orderHistory.paymentIntentId}</span></p>
                               <p className="text-sm text-amber-600">Price : <span>{orderVar.orderHistory.subscriptionId.price}</span></p>
                             </div>
-                            <div className="badge absolute text-xs top-2 text-zinc-400 right-3">{orderVar.orderHistory.subscriptionId.createdAt}</div>
+                            <div className="badge absolute text-xs top-2 text-zinc-400 right-3">{moment(orderVar.orderHistory.subscriptionId.createdAt).format("DD/MM/YYYY")}</div>
+
                           </div>
                         </div>
 
