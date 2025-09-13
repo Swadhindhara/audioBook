@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import logo from "./../assets/images/logo.svg";
+import logo from "./../assets/images/logo.png";
 import { Heart, ShoppingBag, User } from "lucide-react";
 import avatar from "../assets/graphics/avatar.svg";
 import search from "../assets/graphics/search.png";
@@ -97,18 +97,18 @@ const Header = () => {
         <p className="text-sm">SAVE 20% ON YOUR FIRST ORDER! DON'T MISS OUT. <span className="text-primary cursor-pointer">CLAIM YOUR DISCOUNT</span></p>
       </div> */}
       <div
-        className={`header_container bg-black py-4 z-10 relative px-[4%] ${location.pathname === "/" ? "lg:bg-transparent" : "bg-black"
+        className={`header_container bg-white py-4 z-10 relative shadow px-[4%] ${location.pathname === "/" ? "lg:bg-transparent" : "bg-white"
           }`}
       >
         <div className="container m-auto">
           <div className="header flex items-center justify-between">
-            <div className={`left lg:w-1/3 fixed lg:static right-0 top-0 w-2/3 h-full bg-black lg:bg-transparent lg:z-0 z-30 lg:translate-x-0 transition-all duration-300 ease ${active ? "translate-x-0" : "translate-x-[100%]"}`}>
-            <img src={cross} alt="" className="w-10 block lg:hidden absolute left-6 top-2 cursor-pointer" onClick={handleToggle}/>
+            <div className={`left lg:w-1/3 fixed lg:static right-0 top-0 w-2/3 h-full bg-white lg:bg-transparent lg:z-0 z-30 lg:translate-x-0 transition-all duration-300 ease ${active ? "translate-x-0" : "translate-x-[100%]"}`}>
+            <img src={cross} alt="" className="w-6 block lg:hidden absolute left-6 top-2 cursor-pointer" onClick={handleToggle}/>
 
               <ul className="flex lg:items-center items-start gap-5 flex-col lg:flex-row px-8 py-12 lg:p-0">
                 {menu.map((item, index) => (
                   <li key={index}>
-                    <Link to={item.url} className="text-white">
+                    <Link to={item.url} className="text-black" onClick={handleToggle}>
                       {item.name}
                     </Link>
                   </li>
@@ -117,7 +117,7 @@ const Header = () => {
             </div>
             <div className="middle flex items-center justify-center md:w-1/3">
               <Link to="/">
-                <img src={logo} alt="logo" className="lg:w-52 md:w-54 w-40" />
+                <img src={logo} alt="logo" className="lg:w-16 md:w-16 w-12" />
               </Link>
             </div>
             <div className="right flex items-center justify-end gap-5 w-1/3">
@@ -132,7 +132,7 @@ const Header = () => {
               ) : (
                 <Link>
                   {/* <DialogTrigger> */}
-                  <User className="text-white cursor-pointer" onClick={() => login()} />
+                  <User className="text-black cursor-pointer" onClick={() => login()} />
                   {/* </DialogTrigger> */}
                 </Link>
               )}
@@ -149,7 +149,7 @@ const Header = () => {
                 src={ham}
                 alt=""
                 onClick={handleToggle}
-                className="cursor-pointer block lg:hidden w-8"
+                className="cursor-pointer block lg:hidden w-10"
               />
             </div>
           </div>

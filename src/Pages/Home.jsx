@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <>
       {/* ===================== Section 1 =========================== */}
-      <section className="home_section1_container lg:mt-[-80px] ">
+      <section className="home_section1_container  ">
         <div className="home_section1">
           <Swiper
             spaceBetween={0}
