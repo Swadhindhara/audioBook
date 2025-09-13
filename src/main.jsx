@@ -13,7 +13,7 @@ const stripePromise = loadStripe('pk_test_51RY724PkSD3XMsrzzz2OZ44wGSZY8m3UecHTc
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <GoogleOAuthProvider clientId="9131351613-nu2u44eeigdn2rrkbn8v1ob5oph1ftlq.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="389425557517-eato8p4ss6dd0aq8pctv1da1au0cvinm.apps.googleusercontent.com">
       <Provider store={store}>
         <Toaster />
         <Elements stripe={stripePromise}>

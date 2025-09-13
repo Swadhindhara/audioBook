@@ -3,12 +3,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Privacy = () => {
-  const dispatch = useDispatch();
-  const pageData = useSelector((state) => state.page);
+    const dispatch = useDispatch();
+    const pageData = useSelector((state) => state.page);
 
-  useEffect(() => {
-    dispatch(pagesData(1));
-  }, [dispatch]);
+    useEffect(() => {
+      dispatch(pagesData(1));
+    }, [dispatch]);
   return (
     <div className="main py-10 px-[4%] min-h-screen">
       <div className="container mx-auto">

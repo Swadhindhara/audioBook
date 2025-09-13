@@ -48,7 +48,7 @@ const Header = () => {
   const menu = [
     { name: "Home", url: "/" },
     { name: "About", url: "/about" },
-    { name: "Products", url: "/products" },
+    { name: "Books", url: "/products" },
     { name: "Contact", url: "/contact" },
   ];
 
