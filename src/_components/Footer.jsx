@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../assets/images/logo.svg'
+import logo from '../assets/images/logo.png'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { MdOutlineMail } from "react-icons/md";
@@ -25,7 +25,7 @@ const Footer = () => {
                 <div className="container mx-auto">
                     <div className="footer py-10 flex items-start flex-col lg:flex-row gap-6">
                         <div className="left lg:w-1/3 w-full flex flex-col gap-6">
-                            <Link><img src={logo} alt="" className='lg:w-52 md:w-54 w-40' /></Link>
+                            <Link><img src={logo} alt="" className='lg:w-22 md:w-24 w-18' /></Link>
                             <p className='font-[Rubik] leading-7 text-zinc-600 lg:w-[80%]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur quidem quasi, tempore quis blanditiis adipisci voluptatum tenetur ratione doloremque nisi nihil perferendis, tempora iste, consectetur esse earum modi autem quae!</p>
                         </div>
                         <div className="middle w-full lg:w-1/3 flex flex-col gap-5 justify-center">
