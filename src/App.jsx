@@ -10,6 +10,7 @@ import { Footer, ScrollTo } from "./_components";
 import { Dialog } from "./components/ui/dialog";
 import { Drawer } from "./components/ui/drawer";
 import Terms from "./Pages/Terms";
+import Login from "./Pages/Login";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
               <Route path="/subscription" element={<Plans />} />
               <Route path="/payment-successful" element={<PaymentSuccess />} />
               <Route path="/payment-failed" element={<PaymentFailed />} />
+              <Route path="/login" element={<Login />} />
               <Route path="*" element={<Error />} />
             </Routes>
             <Footer />
