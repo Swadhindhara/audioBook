@@ -61,7 +61,6 @@ const Home = () => {
             loop={true}
             autoplay={{
               delay: 3500,
-              pauseOnMouseEnter: true,
               disableOnInteraction: false,
             }}
             pagination={false}
